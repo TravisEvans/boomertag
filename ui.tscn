@@ -1,0 +1,67 @@
+[gd_scene load_steps=2 format=3 uid="uid://bk7vc2uakbucv"]
+
+[ext_resource type="Script" path="res://ui.gd" id="1_ib83g"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_ib83g")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="HUD"]
+layout_mode = 1
+offset_right = 163.0
+offset_bottom = 23.0
+text = "no use for a hud rn"
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0901961, 0.564706, 0.482353, 0.533333)
+
+[node name="Exit" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -337.0
+offset_top = -181.0
+offset_right = -237.0
+offset_bottom = -141.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Exit"
+
+[node name="Resume" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 300.0
+offset_top = -181.0
+offset_right = 400.0
+offset_bottom = -141.0
+grow_vertical = 0
+text = "Resume aka restart"
+
+[connection signal="pressed" from="Menu/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Menu/Resume" to="." method="_on_resume_pressed"]
