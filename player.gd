@@ -5,6 +5,8 @@ const SPRINT_SPEED = 20.0
 const CROUCH_SPEED_MODIFIER = 0.5
 const JUMP_VELOCITY = 5.5
 const SENSITIVITY = 0.004
+const HEIGHT = 2.0
+const CROUCH_HEIGHT = 1.2
 
 @onready var camera = $CameraPivot/Camera3D
 #@onready var cameraPivot = $CameraPivot # the "head" for rotation, idk check this for more info: https://docs.godotengine.org/en/4.0/tutorials/3d/using_transforms.html
@@ -56,8 +58,8 @@ func _physics_process(delta: float) -> void:
 func crouch(crouchState: bool):
 	match crouchState:
 		true: # 1. move viewport down, 2. shrink collision box, 3. slow down character?
-			$CollisionShape3D.shape.height = 1.2
+			$CollisionShape3D.shape.height = lerp($CollisionShape3D.shape.height, CROUCH_HEIGHT, 0.1)
 			#$AnimationPlayer.play("crouch") for future reference
 		false:
-			$CollisionShape3D.shape.height = 2.0
+			$CollisionShape3D.shape.height = lerp($CollisionShape3D.shape.height, HEIGHT, 0.1)
 			#$AnimationPlayer.play("idle") for future reference
