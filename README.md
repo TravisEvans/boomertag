@@ -19,3 +19,8 @@ so far there are many an idea for this, here is a quick dotpoint jumble
 - Ordinance idea: no grav nade
 - Ordinance idea: xtreeeeme grav nade
 - Ordinance idea: just a fucking grenade
+
+## Planned development order
+
+First things first, I want to make a world that isnt complete dogshit to look at. I will get some ideas from LegionGames YT tutorials to learn better the map making within godot
+Post that, I would like to make a gun, to better understand the mechanics involved with raytracing and colliding with objects.
