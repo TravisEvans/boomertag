@@ -9,6 +9,7 @@ const HEIGHT = 2.0
 const CROUCH_HEIGHT = 1.2
 
 @onready var camera = $CameraPivot/Camera3D
+@onready var uiTempLabel = get_tree().current_scene.get_node("UI/HUD/Label") #DEBUG
 #@onready var cameraPivot = $CameraPivot # the "head" for rotation, idk check this for more info: https://docs.godotengine.org/en/4.0/tutorials/3d/using_transforms.html
 
 
@@ -20,7 +21,7 @@ func _unhandled_input(event): # originally yoinked from https://github.com/Legio
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * SENSITIVITY)
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-40), deg_to_rad(60))
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-85), deg_to_rad(85))
 
 
 func _physics_process(delta: float) -> void:
@@ -39,11 +40,11 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction and Input.is_action_pressed("sprint"): # check if sprinting
-		velocity.x = lerp(velocity.x, (direction.x * SPRINT_SPEED), 2)
-		velocity.z = lerp(velocity.z, (direction.z * SPRINT_SPEED), 2)
+		velocity.x = move_toward(velocity.x, (direction.x * SPRINT_SPEED), 2.0)
+		velocity.z = move_toward(velocity.z, (direction.z * SPRINT_SPEED), 2.0)
 	elif direction:
-		velocity.x = move_toward(velocity.x, (direction.x * SPEED), 1.5)
-		velocity.z = move_toward(velocity.z, (direction.z * SPEED), 1.5)
+		velocity.x = move_toward(velocity.x, (direction.x * SPEED), 1.0)
+		velocity.z = move_toward(velocity.z, (direction.z * SPEED), 1.0)
 	elif is_on_floor():
 		velocity.x = move_toward(velocity.x, 0.0, 0.5)
 		velocity.z = move_toward(velocity.z, 0.0, 0.5)
@@ -51,6 +52,8 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_pressed("crouch") and is_on_floor():
 		velocity.x *= CROUCH_SPEED_MODIFIER
 		velocity.z *= CROUCH_SPEED_MODIFIER
+	
+	updateVelocityLabel(velocity.x, velocity.z)
 	# I have no fucking clue how effective this is
 	move_and_slide()
 
@@ -63,3 +66,6 @@ func crouch(crouchState: bool):
 		false:
 			$CollisionShape3D.shape.height = lerp($CollisionShape3D.shape.height, HEIGHT, 0.1)
 			#$AnimationPlayer.play("idle") for future reference
+
+func updateVelocityLabel(velX: float, velZ: float) -> void: #DEBUG
+	uiTempLabel.text = "Current velocity: " + str(velX) + ", " + str(velZ)

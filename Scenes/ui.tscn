@@ -18,7 +18,7 @@ grow_vertical = 2
 layout_mode = 1
 offset_right = 163.0
 offset_bottom = 23.0
-text = "no use for a hud rn"
+text = "Current velocity: "
 
 [node name="CenterContainer" type="CenterContainer" parent="HUD"]
 layout_mode = 1
