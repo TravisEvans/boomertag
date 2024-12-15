@@ -1,9 +1,9 @@
 [gd_scene load_steps=21 format=3 uid="uid://dtbojl4s87h1"]
 
-[ext_resource type="PackedScene" uid="uid://dwhixuig3yp8w" path="res://player.tscn" id="1_lkojk"]
-[ext_resource type="Script" path="res://main.gd" id="1_nv5t6"]
-[ext_resource type="PackedScene" uid="uid://bk7vc2uakbucv" path="res://ui.tscn" id="3_ip63r"]
-[ext_resource type="PackedScene" uid="uid://cs7vp46r7ie5d" path="res://world.tscn" id="4_ofop0"]
+[ext_resource type="PackedScene" uid="uid://dwhixuig3yp8w" path="res://Scenes/player.tscn" id="1_lkojk"]
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_nv5t6"]
+[ext_resource type="PackedScene" uid="uid://bk7vc2uakbucv" path="res://Scenes/ui.tscn" id="3_ip63r"]
+[ext_resource type="PackedScene" uid="uid://cs7vp46r7ie5d" path="res://Scenes/world.tscn" id="4_ofop0"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mnt0p"]
 size = Vector3(50, 1, 50)
@@ -76,7 +76,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_7eqhq")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -3.09086e-08, 0.707107, -0.629346, -0.455902, 0.629346, 0.322372, -0.89003, -0.322372, -16.1634, 44.0145, -45.7971)
-light_color = Color(0.943138, 0.988428, 0.996668, 1)
 light_energy = 1.552
 light_indirect_energy = 3.023
 light_volumetric_fog_energy = 1.552
@@ -250,6 +249,6 @@ flip_faces = true
 size = Vector3(10, 10, 10)
 
 [node name="World" parent="." instance=ExtResource("4_ofop0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 166.097, -4.63263, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.3156, -4.63263, 35.5977)
 
 [connection signal="exit" from="UI" to="." method="_on_ui_exit"]

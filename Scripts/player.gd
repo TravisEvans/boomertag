@@ -39,14 +39,14 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction and Input.is_action_pressed("sprint"): # check if sprinting
-		velocity.x = move_toward(velocity.x, (direction.x * SPRINT_SPEED), 2)
-		velocity.z = move_toward(velocity.z, (direction.z * SPRINT_SPEED), 2)
+		velocity.x = lerp(velocity.x, (direction.x * SPRINT_SPEED), 2)
+		velocity.z = lerp(velocity.z, (direction.z * SPRINT_SPEED), 2)
 	elif direction:
 		velocity.x = move_toward(velocity.x, (direction.x * SPEED), 1.5)
 		velocity.z = move_toward(velocity.z, (direction.z * SPEED), 1.5)
 	elif is_on_floor():
-		velocity.x = move_toward(velocity.x, 0, 0.5)
-		velocity.z = move_toward(velocity.z, 0, 0.5)
+		velocity.x = move_toward(velocity.x, 0.0, 0.5)
+		velocity.z = move_toward(velocity.z, 0.0, 0.5)
 	# Finally checks for crouching to modify crouch walk speed
 	if Input.is_action_pressed("crouch") and is_on_floor():
 		velocity.x *= CROUCH_SPEED_MODIFIER
