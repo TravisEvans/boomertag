@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 const SPEED = 10.0
 const SPRINT_SPEED = 20.0
-const AIR_SPEED = 5.0
+const AIR_STRAFE_SPEED = 5.0
 const CROUCH_SPEED_MODIFIER = 0.5
 const JUMP_VELOCITY = 5.5
 const SENSITIVITY = 0.004
@@ -46,15 +46,19 @@ func _physics_process(delta: float) -> void:
 	elif direction and is_on_floor():
 		velocity.x = move_toward(velocity.x, (direction.x * SPEED), 0.5)
 		velocity.z = move_toward(velocity.z, (direction.z * SPEED), 0.5)
-	#elif !is_on_floor(): # SHOULD be air strafing
-		#velocity.x = move_toward(velocity.x, (direction.x * AIR_SPEED), 0.085)
-		#velocity.z = move_toward(velocity.z, (direction.z * AIR_SPEED), 0.085)
-		# I think I might make another Input check to see if !is_on_ground() and
-		# add a static air strafe speed w/ interpolation ###
 	elif is_on_floor():
 		velocity.x = move_toward(velocity.x, 0.0, 0.5)
 		velocity.z = move_toward(velocity.z, 0.0, 0.5)
-	# Finally checks for crouching to modify crouch walk speed
+	
+	#Handle air strafing IM FUCKING TRYIN
+	#if (Input.is_action_just_pressed("left") or Input.is_action_just_pressed("right")) and !is_on_floor():
+		#velocity.x += direction.x * AIR_STRAFE_SPEED
+		#velocity.z += direction.z * AIR_STRAFE_SPEED
+	#if (Input.is_action_just_released("left") or Input.is_action_just_released("right")) and !is_on_floor():
+		#velocity.x -= direction.x * AIR_STRAFE_SPEED
+		#velocity.z -= direction.z * AIR_STRAFE_SPEED
+	
+	# Checks for crouching to modify crouch walk speed
 	if Input.is_action_pressed("crouch") and is_on_floor():
 		velocity.x *= CROUCH_SPEED_MODIFIER
 		velocity.z *= CROUCH_SPEED_MODIFIER
@@ -72,6 +76,7 @@ func crouch(crouchState: bool):
 		false:
 			$CollisionShape3D.shape.height = lerp($CollisionShape3D.shape.height, HEIGHT, 0.1)
 			#$AnimationPlayer.play("idle") for future reference
+
 
 func updateVelocityLabel(velX: float, velZ: float) -> void: #DEBUG
 	uiTempLabel.text = "Current velocity: " + str(snapped(velX, 0.01)) + ", " + str(snapped(velZ, 0.01))
