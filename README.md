@@ -3,7 +3,7 @@ boomer shooter tag
 
 so far there are many an idea for this, here is a quick dotpoint jumble
 
-## BASE MECHANICS
+## Base mechanics
 - Equipment and Ordinance: you can have a grenade that affects how you or others move, and an equipment that affect how you interact
 - Tag. duh. knock a mf down and kingmake that bitch
 - Parry mechanic. Nothin feels better than to say "nuh-uh" to someone trying to shoot you with something.
@@ -24,6 +24,17 @@ so far there are many an idea for this, here is a quick dotpoint jumble
 
 First things first, I want to make a world that isnt complete dogshit to look at. I will get some ideas from LegionGames YT tutorials to learn better the map making within godot
 Post that, I would like to make a gun, to better understand the mechanics involved with raytracing and colliding with objects.
+
+## Current issues
+- You will hit your head when uncrouching
+- stairs are an impossible KZ challenge
+- Generation of TrenchBroom maps are somewhat complex and best kept VERY simple.
+> TrenchBroom maps also need textures, lest they are pure white with 600 surfaces
+
+## Things to be added
+- Slide
+- Wall run? Maybe? I think so
+- ???????
 
 ## Development areas
 - Tilemap development: Creation of assets for tilemaps.

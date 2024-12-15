@@ -18,6 +18,7 @@ metallic_texture_channel = 2
 roughness_texture = SubResource("CompressedTexture2D_wpqgk")
 roughness_texture_channel = 1
 normal_enabled = true
+normal_scale = 4.95
 normal_texture = SubResource("CompressedTexture2D_t3olf")
 uv1_scale = Vector3(0.1, 0.1, 0.1)
 uv1_triplanar = true

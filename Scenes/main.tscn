@@ -74,16 +74,10 @@ surface_material_override/0 = SubResource("StandardMaterial3D_7eqhq")
 
 [node name="Player" parent="." instance=ExtResource("1_lkojk")]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.707107, -3.09086e-08, 0.707107, -0.629346, -0.455902, 0.629346, 0.322372, -0.89003, -0.322372, -16.1634, 44.0145, -45.7971)
-light_energy = 1.552
-light_indirect_energy = 3.023
-light_volumetric_fog_energy = 1.552
-
 [node name="UI" parent="." instance=ExtResource("3_ip63r")]
 
 [node name="World" parent="." instance=ExtResource("4_ofop0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.3156, -4.63263, 35.5977)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.2624, -16.5794, 43.1493)
 
 [node name="CSGContainers" type="Node3D" parent="."]
 
@@ -116,8 +110,8 @@ size = Vector3(1, 1.65723, 1)
 material = SubResource("StandardMaterial3D_cquvq")
 
 [node name="wall" type="CSGBox3D" parent="CSGContainers/CSGCombiner3D"]
-transform = Transform3D(2.9, 0, 0, 0, 1, 0, 0, 0, 2, -25.2625, -3.762, 0.153687)
-size = Vector3(0.5, 6, 25)
+transform = Transform3D(2.9, 0, 0, 0, 1, 0, 0, 0, 2, -25.2625, -6.11552, 0.153687)
+size = Vector3(0.5, 1.29297, 25)
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="CSGContainers/CSGCombiner3D"]
 transform = Transform3D(-1.26763e-07, 0, -2, 0, 1, 0, 2.9, 0, -8.74228e-08, -0.262495, -3.762, 26.1537)
