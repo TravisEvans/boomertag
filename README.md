@@ -33,7 +33,7 @@ Post that, I would like to make a gun, to better understand the mechanics involv
 - Programming and scripting
 > Not being done
 - Fucking around in godot
-> SOOO being done - chab
+> SOOO being done - chab, and evan
 - learning blendr, laigter, and krita
 > also being done, chab
 - I think learning TrenchBroom would be a great idea for mechanic garden prototyping

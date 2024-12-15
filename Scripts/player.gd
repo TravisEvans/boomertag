@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 const SPEED = 10.0
 const SPRINT_SPEED = 20.0
+const AIR_SPEED = 5.0
 const CROUCH_SPEED_MODIFIER = 0.5
 const JUMP_VELOCITY = 5.5
 const SENSITIVITY = 0.004
@@ -39,12 +40,17 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction and Input.is_action_pressed("sprint"): # check if sprinting
-		velocity.x = move_toward(velocity.x, (direction.x * SPRINT_SPEED), 2.0)
-		velocity.z = move_toward(velocity.z, (direction.z * SPRINT_SPEED), 2.0)
-	elif direction:
-		velocity.x = move_toward(velocity.x, (direction.x * SPEED), 1.0)
-		velocity.z = move_toward(velocity.z, (direction.z * SPEED), 1.0)
+	if direction and Input.is_action_pressed("sprint") and is_on_floor(): # check if sprinting on ground
+		velocity.x = move_toward(velocity.x, (direction.x * SPRINT_SPEED), 1.0)
+		velocity.z = move_toward(velocity.z, (direction.z * SPRINT_SPEED), 1.0)
+	elif direction and is_on_floor():
+		velocity.x = move_toward(velocity.x, (direction.x * SPEED), 0.5)
+		velocity.z = move_toward(velocity.z, (direction.z * SPEED), 0.5)
+	#elif !is_on_floor(): # SHOULD be air strafing
+		#velocity.x = move_toward(velocity.x, (direction.x * AIR_SPEED), 0.085)
+		#velocity.z = move_toward(velocity.z, (direction.z * AIR_SPEED), 0.085)
+		# I think I might make another Input check to see if !is_on_ground() and
+		# add a static air strafe speed w/ interpolation ###
 	elif is_on_floor():
 		velocity.x = move_toward(velocity.x, 0.0, 0.5)
 		velocity.z = move_toward(velocity.z, 0.0, 0.5)
@@ -68,4 +74,4 @@ func crouch(crouchState: bool):
 			#$AnimationPlayer.play("idle") for future reference
 
 func updateVelocityLabel(velX: float, velZ: float) -> void: #DEBUG
-	uiTempLabel.text = "Current velocity: " + str(velX) + ", " + str(velZ)
+	uiTempLabel.text = "Current velocity: " + str(snapped(velX, 0.01)) + ", " + str(snapped(velZ, 0.01))
