@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bk7vc2uakbucv"]
 
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_ib83g"]
-[ext_resource type="Texture2D" path="res://Textures/UI_art/crosshair179.png" id="2_jifps"]
+[ext_resource type="Texture2D" uid="uid://bsscsb7hf1wmr" path="res://Textures/Sprites/crosshair179.png" id="2_jifps"]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_ib83g")

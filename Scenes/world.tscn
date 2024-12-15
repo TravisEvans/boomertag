@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=4 uid="uid://cs7vp46r7ie5d"]
+[gd_scene load_steps=8 format=4 uid="uid://cs7vp46r7ie5d"]
 
-[ext_resource type="Material" path="res://Textures/ground/rocky_terrain_02.tres" id="1_e8o5q"]
-[ext_resource type="Texture2D" path="res://Models/temp/Textures/colormap.png" id="2_l0dho"]
+[ext_resource type="Material" uid="uid://cw4apd8v7w7pc" path="res://Textures/rocky_terrain.tres" id="1_b30w3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_p7spx"]
 size = Vector3(100, 1, 100)
@@ -12,7 +11,6 @@ size = Vector3(100, 1, 100)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6wqbl"]
 resource_name = "colormap"
 cull_mode = 2
-albedo_texture = ExtResource("2_l0dho")
 texture_filter = 2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_f0sfd"]
@@ -60,7 +58,7 @@ shape = SubResource("BoxShape3D_p7spx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("BoxMesh_n2t3q")
-surface_material_override/0 = ExtResource("1_e8o5q")
+surface_material_override/0 = ExtResource("1_b30w3")
 
 [node name="bench-damaged2" type="StaticBody3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 4.61974, 0, -1.04971)

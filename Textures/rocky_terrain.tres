@@ -1,0 +1,22 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://cw4apd8v7w7pc"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1c5u1"]
+load_path = "res://.godot/imported/rocky_terrain_02_diff_1k.jpg-84d091ba5212b68c0aa2cbc4497d1fe8.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wpqgk"]
+load_path = "res://.godot/imported/rocky_terrain_02_arm_1k.jpg-32f24cc81ee836aee6cd5a50cc48f7e0.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_t3olf"]
+load_path = "res://.godot/imported/rocky_terrain_02_nor_gl_1k.jpg-6d3aae921e1eb0d0a44b271a8b2c8040.s3tc.ctex"
+
+[resource]
+resource_name = "rocky_terrain_02"
+albedo_texture = SubResource("CompressedTexture2D_1c5u1")
+metallic_texture = SubResource("CompressedTexture2D_wpqgk")
+metallic_texture_channel = 2
+roughness_texture = SubResource("CompressedTexture2D_wpqgk")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = SubResource("CompressedTexture2D_t3olf")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true
