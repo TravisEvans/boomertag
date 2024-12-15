@@ -24,3 +24,17 @@ so far there are many an idea for this, here is a quick dotpoint jumble
 
 First things first, I want to make a world that isnt complete dogshit to look at. I will get some ideas from LegionGames YT tutorials to learn better the map making within godot
 Post that, I would like to make a gun, to better understand the mechanics involved with raytracing and colliding with objects.
+
+## Development areas
+- Tilemap development: Creation of assets for tilemaps.
+> Not being done
+- Sprite and asset development: the game needs sprites, characters, colours and shit
+> Not being done
+- Programming and scripting
+> Not being done
+- Fucking around in godot
+> SOOO being done - chab
+- learning blendr, laigter, and krita
+> also being done, chab
+- I think learning TrenchBroom would be a great idea for mechanic garden prototyping
+> Not being done

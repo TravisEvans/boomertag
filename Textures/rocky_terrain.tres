@@ -11,6 +11,7 @@ load_path = "res://.godot/imported/rocky_terrain_02_nor_gl_1k.jpg-6d3aae921e1eb0
 
 [resource]
 resource_name = "rocky_terrain_02"
+cull_mode = 2
 albedo_texture = SubResource("CompressedTexture2D_1c5u1")
 metallic_texture = SubResource("CompressedTexture2D_wpqgk")
 metallic_texture_channel = 2
