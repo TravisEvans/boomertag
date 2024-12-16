@@ -1,4 +1,4 @@
-[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://cw4apd8v7w7pc"]
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://ckmo5a31l2n7e"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1c5u1"]
 load_path = "res://.godot/imported/rocky_terrain_02_diff_1k.jpg-84d091ba5212b68c0aa2cbc4497d1fe8.s3tc.ctex"

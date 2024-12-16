@@ -83,3 +83,6 @@ func crouch(crouchState: bool):
 func updateDEBUGLabel(velX: float, velZ: float, dir: Vector3) -> void: #DEBUG
 	uiTempLabel.text = "Current velocity: " + str(snapped(velX, 0.01)) + ", " + str(snapped(velZ, 0.01)) + " 
 	Current absolute direction: " + str(snapped(dir.x,0.01)) + "," + str(snapped(dir.z,0.01))
+
+func checkUncrouchCollision():
+	$CrouchCollisionMarker
