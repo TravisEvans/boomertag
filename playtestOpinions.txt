@@ -1,0 +1,14 @@
+Ethan's (pussyfart123) v1.0.0-alpha perspective
+good:
+"pretty good"
+feels flowwy, potential in fluidity
+says "watch ghostrunner gameplay no death run"
+bad:
+crouch speed way too slow (known bug)
+sprint way too fast (maybe try sprint/ supersprint)
+jumping momentum is confusing, somewhat clunky and slow
+add wallrunning, sliding
+comments:
+look at other games for level design.
+for an alpha, pretty commendable.
+again, look at ghostrunner- "https://youtu.be/3_ZXa14odts?t=2760"

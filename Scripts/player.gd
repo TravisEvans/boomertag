@@ -1,18 +1,20 @@
 extends CharacterBody3D
 
 const SPEED = 10.0
-const SPRINT_SPEED = 20.0
+const SPRINT_SPEED = 15.0
 const AIR_STRAFE_ACCELERATION = 500.0 # this is HUGE because of ????? 
+const GROUND_ACCELERATION = 1000.0
 const SPEED_LIMIT = 0.8
-const CROUCH_SPEED_MODIFIER = 0.5
+const CROUCH_SPEED = 5.0
 const JUMP_VELOCITY = 5.5
 const SENSITIVITY = 0.004
 const HEIGHT = 2.0
 const CROUCH_HEIGHT = 1.2
 
 @onready var camera = $CameraPivot/Camera3D
-@onready var uiTempLabel = get_tree().current_scene.get_node("UI/HUD/Label") #DEBUG
+@onready var uiTempLabel = get_tree().current_scene.get_node("UI/HUD/Label") ##DEBUG
 #@onready var cameraPivot = $CameraPivot # the "head" for rotation, idk check this for more info: https://docs.godotengine.org/en/4.0/tutorials/3d/using_transforms.html
+
 
 
 func _ready():
@@ -34,8 +36,6 @@ func _physics_process(delta: float) -> void:
 	# Handle jump. 
 	if Input.is_action_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-	# Handle crouch
-	crouch(Input.is_action_pressed("crouch"))
 	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -44,26 +44,28 @@ func _physics_process(delta: float) -> void:
 	if direction and Input.is_action_pressed("sprint") and is_on_floor(): # check if sprinting on ground
 		velocity.x = lerp(velocity.x, (direction.x * SPRINT_SPEED), 0.05)
 		velocity.z = lerp(velocity.z, (direction.z * SPRINT_SPEED), 0.05)
-	elif direction and is_on_floor():
-		velocity.x = lerp(velocity.x, (direction.x * SPEED), 0.025)
-		velocity.z = lerp(velocity.z, (direction.z * SPEED), 0.025)
-	elif is_on_floor():
+	if direction and Input.is_action_pressed("crouch") and is_on_floor(): # check if crouching on ground
+		velocity.x = lerp(velocity.x, (direction.x * CROUCH_SPEED), 0.1)
+		velocity.z = lerp(velocity.z, (direction.z * CROUCH_SPEED), 0.1)
+	elif direction and is_on_floor(): # check if moving on ground
+		velocity.x = lerp(velocity.x, (direction.x * SPEED), 0.05)
+		velocity.z = lerp(velocity.z, (direction.z * SPEED), 0.05)
+	elif is_on_floor(): # check if not moving on ground
 		velocity.x = move_toward(velocity.x, 0.0, 0.5)
 		velocity.z = move_toward(velocity.z, 0.0, 0.5)
+	
+	# Handle crouching position change
+	crouch(Input.is_action_pressed("crouch"))
 	
 	# Handle air strafing -- https://www.willdonnelly.net/blog/2021-05-16-godot-airstrafe-controller/
 	# Project current velocity onto the strafe direction, and compute a capped
 	# acceleration such that *projected* speed will remain within the limit.
 	var currentSpeed = direction.dot(velocity)
-	var accel = AIR_STRAFE_ACCELERATION * delta
+	var accel = GROUND_ACCELERATION * delta if is_on_floor() else AIR_STRAFE_ACCELERATION * delta
 	accel = max(0, min(accel, SPEED_LIMIT - currentSpeed))
 	# Apply strafe acceleration to velocity and then integrate motion
 	velocity += direction * accel
 	
-	# Checks for crouching to modify crouch walk speed
-	if Input.is_action_pressed("crouch") and is_on_floor():
-		velocity.x *= CROUCH_SPEED_MODIFIER
-		velocity.z *= CROUCH_SPEED_MODIFIER
 	
 	updateDEBUGLabel(velocity.x, velocity.z, direction)
 	# I have no fucking clue how effective this is
@@ -72,17 +74,16 @@ func _physics_process(delta: float) -> void:
 
 func crouch(crouchState: bool):
 	match crouchState:
-		true: # 1. move viewport down, 2. shrink collision box, 3. slow down character?
+		true: # 1. move viewport down, 2. shrink collision box, 3. check if yo hittin yo head
 			$CollisionShape3D.shape.height = lerp($CollisionShape3D.shape.height, CROUCH_HEIGHT, 0.1)
-			#$AnimationPlayer.play("crouch") for future reference
 		false:
-			$CollisionShape3D.shape.height = lerp($CollisionShape3D.shape.height, HEIGHT, 0.1)
-			#$AnimationPlayer.play("idle") for future reference
+			if $HeadCollision.is_colliding(): # good enough for now for crouch collision
+				pass
+			else: # get bigger becaue not hittin yo head
+				$CollisionShape3D.shape.height = lerp($CollisionShape3D.shape.height, HEIGHT, 0.1)
 
 
-func updateDEBUGLabel(velX: float, velZ: float, dir: Vector3) -> void: #DEBUG
-	uiTempLabel.text = "Current velocity: " + str(snapped(velX, 0.01)) + ", " + str(snapped(velZ, 0.01)) + " 
-	Current absolute direction: " + str(snapped(dir.x,0.01)) + "," + str(snapped(dir.z,0.01))
-
-func checkUncrouchCollision():
-	$CrouchCollisionMarker
+func updateDEBUGLabel(velX: float, velZ: float, dir: Vector3) -> void: ##DEBUG
+	uiTempLabel.text = "Current directional velocity: " + str(snapped(velX, 0.01)) + ", " + str(snapped(velZ, 0.01)) + " 
+	Current absolute direction: " + str(snapped(dir.x,0.01)) + "," + str(snapped(dir.z,0.01)) + "
+	Current total velocity: " + str(snapped(velocity.dot(velocity), 0.01))
