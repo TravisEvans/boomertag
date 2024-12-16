@@ -4,7 +4,7 @@ const SPEED = 10.0
 const SPRINT_SPEED = 15.0
 const AIR_STRAFE_ACCELERATION = 500.0 # this is HUGE because of ????? 
 const GROUND_ACCELERATION = 1000.0
-const SPEED_LIMIT = 0.8
+const SPEED_LIMIT = 1.2
 const CROUCH_SPEED = 5.0
 const JUMP_VELOCITY = 5.5
 const SENSITIVITY = 0.004
@@ -41,10 +41,12 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction and Input.is_action_pressed("sprint") and is_on_floor(): # check if sprinting on ground
+	if direction and Input.is_action_pressed("sprint") and is_on_floor() and !Input.is_action_pressed("crouch"): # check if sprinting on ground and NOT crouching
 		velocity.x = lerp(velocity.x, (direction.x * SPRINT_SPEED), 0.05)
 		velocity.z = lerp(velocity.z, (direction.z * SPRINT_SPEED), 0.05)
-	if direction and Input.is_action_pressed("crouch") and is_on_floor(): # check if crouching on ground
+	elif velocity.length() >= CROUCH_SPEED and is_on_floor() and Input.is_action_pressed("crouch"): # check if crouching on ground with momentum, aka slide
+		velocity = velocity.lerp(velocity.slide(get_floor_normal().cross(Vector3.UP).normalized()), 0.01) # heres the magic
+	elif direction and Input.is_action_pressed("crouch") and is_on_floor(): # check if crouching on ground
 		velocity.x = lerp(velocity.x, (direction.x * CROUCH_SPEED), 0.1)
 		velocity.z = lerp(velocity.z, (direction.z * CROUCH_SPEED), 0.1)
 	elif direction and is_on_floor(): # check if moving on ground
@@ -67,9 +69,10 @@ func _physics_process(delta: float) -> void:
 	velocity += direction * accel
 	
 	
-	updateDEBUGLabel(velocity.x, velocity.z, direction)
+	updateDEBUGLabel(direction)
 	# I have no fucking clue how effective this is
 	move_and_slide()
+# END of _physics_process
 
 
 func crouch(crouchState: bool):
@@ -83,7 +86,18 @@ func crouch(crouchState: bool):
 				$CollisionShape3D.shape.height = lerp($CollisionShape3D.shape.height, HEIGHT, 0.1)
 
 
-func updateDEBUGLabel(velX: float, velZ: float, dir: Vector3) -> void: ##DEBUG
-	uiTempLabel.text = "Current directional velocity: " + str(snapped(velX, 0.01)) + ", " + str(snapped(velZ, 0.01)) + " 
+func checkValidFloorCollision() -> Vector3:
+	if get_last_slide_collision() == null:
+		return Vector3.ONE
+	#elif axis == "x":
+		#return get_last_slide_collision().get_normal().x
+	#elif axis == "z":
+		#return get_last_slide_collision().get_normal().z
+	else: return get_last_slide_collision().get_normal()
+	return Vector3.ZERO
+
+
+func updateDEBUGLabel(dir: Vector3) -> void: ##DEBUG
+	uiTempLabel.text = "Current directional velocity: " + str(snapped(velocity.x, 0.01)) + ", " + str(snapped(velocity.z, 0.01)) + " 
 	Current absolute direction: " + str(snapped(dir.x,0.01)) + "," + str(snapped(dir.z,0.01)) + "
-	Current total velocity: " + str(snapped(velocity.dot(velocity), 0.01))
+	Current total velocity: " + str(snapped(velocity.length(), 0.01))

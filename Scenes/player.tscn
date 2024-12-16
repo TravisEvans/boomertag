@@ -13,13 +13,12 @@ material = SubResource("StandardMaterial3D_u6jfv")
 [node name="Player" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
+floor_max_angle = 0.872665
 script = ExtResource("1_jr6bq")
 metadata/_edit_group_ = true
 
 [node name="HeadCollision" type="RayCast3D" parent="."]
 target_position = Vector3(0, 1.2, 0)
-debug_shape_custom_color = Color(0.929306, 0, 0.15943, 1)
-debug_shape_thickness = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_c0eee")
