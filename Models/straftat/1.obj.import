@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://vosljqui5dgn"
+path="res://.godot/imported/1.obj-b89945f22a4c8df91c4a421c3178cbcc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/1.obj-b89945f22a4c8df91c4a421c3178cbcc.mesh"]
+
+source_file="res://Models/straftat/1.obj"
+dest_files=["res://.godot/imported/1.obj-b89945f22a4c8df91c4a421c3178cbcc.mesh", "res://.godot/imported/1.obj-b89945f22a4c8df91c4a421c3178cbcc.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
