@@ -29,21 +29,27 @@ func _unhandled_input(event): # originally yoinked from https://github.com/Legio
 
 func _physics_process(delta: float) -> void:
 	
-	# Handle jump. 
-	if Input.is_action_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-	
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction and Input.is_action_pressed("sprint") and is_on_floor() and !Input.is_action_pressed("crouch"): # check if sprinting on ground and NOT crouching
+	
+	# Handle jump. 
+	if Input.is_action_pressed("jump") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+	elif direction and Input.is_action_pressed("sprint") and is_on_floor() and !Input.is_action_pressed("crouch"): # check if sprinting on ground and NOT crouching
 		velocity.x = lerp(velocity.x, (direction.x * SPRINT_SPEED), 0.05)
 		velocity.z = lerp(velocity.z, (direction.z * SPRINT_SPEED), 0.05)
 	elif velocity.length() > CROUCH_SPEED and is_on_floor() and Input.is_action_pressed("crouch"): # check if crouching on ground with momentum, aka slide
-		velocity += get_gravity() # apply gravity
-		velocity.x = lerp(velocity.x, velocity.slide(get_floor_normal()).x, 0.01)
-		velocity.z = lerp(velocity.z, velocity.slide(get_floor_normal()).z, 0.01)
+		# this checks if ground is flat or otherwise
+		var changingVelocity = 0.25 if (get_floor_normal() == Vector3.UP) or get_floor_angle()>deg_to_rad(40.0) else 0.9
+		# apply gravity (increased) to allow sliding on slopes, kinda, otherwise do nothing
+		velocity += Vector3.ZERO if (get_floor_normal() == Vector3.UP) or get_floor_angle()>deg_to_rad(40.0) else get_gravity()*1.2
+		# apply to velocity as normal, with modifiers
+		velocity.x = lerp(velocity.x, velocity.slide(get_floor_normal()).x*changingVelocity, 0.01)
+		velocity.z = lerp(velocity.z, velocity.slide(get_floor_normal()).z*changingVelocity, 0.01)
+		print(rad_to_deg(get_floor_angle()))
+		print(changingVelocity)
 	elif direction and Input.is_action_pressed("crouch") and is_on_floor(): # check if crouching on ground
 		velocity.x = lerp(velocity.x, (direction.x * CROUCH_SPEED), 0.1)
 		velocity.z = lerp(velocity.z, (direction.z * CROUCH_SPEED), 0.1)
