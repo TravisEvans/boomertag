@@ -2,9 +2,9 @@ extends CharacterBody3D
 
 const SPEED = 10.0
 const SPRINT_SPEED = 15.0
-const AIR_STRAFE_ACCELERATION = 250.0 # this is HUGE because of ????? 
-const GROUND_ACCELERATION = 1000.0
-const SPEED_LIMIT = 0.8 # changes air speed
+const AIR_STRAFE_ACCELERATION = 150.0 # changes air speed 
+const GROUND_ACCELERATION = 1000.0 
+const SPEED_LIMIT = 0.2 # changes air speed?
 const CROUCH_SPEED = 5.0
 const JUMP_VELOCITY = 5.5
 const SENSITIVITY = 0.003
