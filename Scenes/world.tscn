@@ -196,3 +196,9 @@ transform = Transform3D(12.941, 0, -9.65926, 0, 20, 0, 48.2963, 0, 2.58819, 12.2
 use_collision = true
 polygon = PackedVector2Array(0, 0, 0, 1, 0, 1, 1, 0)
 material = SubResource("StandardMaterial3D_0rjl8")
+
+[node name="CSGPolygon3D6" type="CSGPolygon3D" parent="."]
+transform = Transform3D(-12.941, 0, 9.65926, 0, 20, 0, -48.2963, 0, -2.58819, 42.6711, -0.121615, 64.6184)
+use_collision = true
+polygon = PackedVector2Array(0, 0, 0, 1, 0, 1, 1, 0)
+material = SubResource("StandardMaterial3D_0rjl8")

@@ -29,10 +29,6 @@ func _unhandled_input(event): # originally yoinked from https://github.com/Legio
 
 func _physics_process(delta: float) -> void:
 	
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-	
 	# Handle jump. 
 	if Input.is_action_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
@@ -44,8 +40,10 @@ func _physics_process(delta: float) -> void:
 	if direction and Input.is_action_pressed("sprint") and is_on_floor() and !Input.is_action_pressed("crouch"): # check if sprinting on ground and NOT crouching
 		velocity.x = lerp(velocity.x, (direction.x * SPRINT_SPEED), 0.05)
 		velocity.z = lerp(velocity.z, (direction.z * SPRINT_SPEED), 0.05)
-	elif velocity.length() >= CROUCH_SPEED and is_on_floor() and Input.is_action_pressed("crouch"): # check if crouching on ground with momentum, aka slide
-		velocity = velocity.lerp(velocity.slide(get_floor_normal().cross(Vector3.UP).normalized()), 0.01) # heres the magic
+	elif velocity.length() > CROUCH_SPEED and is_on_floor() and Input.is_action_pressed("crouch"): # check if crouching on ground with momentum, aka slide
+		velocity += get_gravity() # apply gravity
+		velocity.x = lerp(velocity.x, velocity.slide(get_floor_normal()).x, 0.01)
+		velocity.z = lerp(velocity.z, velocity.slide(get_floor_normal()).z, 0.01)
 	elif direction and Input.is_action_pressed("crouch") and is_on_floor(): # check if crouching on ground
 		velocity.x = lerp(velocity.x, (direction.x * CROUCH_SPEED), 0.1)
 		velocity.z = lerp(velocity.z, (direction.z * CROUCH_SPEED), 0.1)
@@ -56,6 +54,18 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0.0, 0.5)
 		velocity.z = move_toward(velocity.z, 0.0, 0.5)
 	
+	if Input.is_action_just_pressed("debugQuery"): ##DEBUG
+		#print("debugging")
+		print("
+		normal: " + str(get_floor_normal()) + "
+		NORMAL lngth: " + str(get_floor_normal().length()) + "
+		vel.slide(nrm): " + str(velocity.slide(get_floor_normal())))
+	if Input.is_action_just_pressed("debugAction"): ##DEBUG
+		velocity*=3
+	
+	# Add the gravity.
+	if not is_on_floor():
+		velocity += get_gravity() * delta
 	# Handle crouching position change
 	crouch(Input.is_action_pressed("crouch"))
 	
