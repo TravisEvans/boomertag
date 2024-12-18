@@ -77,11 +77,11 @@ func _physics_process(delta: float) -> void:
 	# Handle air strafing -- https://www.willdonnelly.net/blog/2021-05-16-godot-airstrafe-controller/
 	# Project current velocity onto the strafe direction, and compute a capped
 	# acceleration such that *projected* speed will remain within the limit.
-	#var currentSpeed = direction.dot(velocity)
-	#var accel = GROUND_ACCELERATION * delta if is_on_floor() else AIR_STRAFE_ACCELERATION * delta
-	#accel = max(0, min(accel, SPEED_LIMIT - currentSpeed))
-	## Apply strafe acceleration to velocity and then integrate motion
-	#velocity += direction * accel
+	var currentSpeed = direction.dot(velocity)
+	var accel = GROUND_ACCELERATION * delta if is_on_floor() else AIR_STRAFE_ACCELERATION * delta
+	accel = max(0, min(accel, SPEED_LIMIT - currentSpeed))
+	# Apply strafe acceleration to velocity and then integrate motion
+	velocity += direction * accel
 	
 	
 	if Input.is_action_just_pressed("debugQuery"): ##DEBUG

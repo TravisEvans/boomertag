@@ -9,7 +9,7 @@
 script = ExtResource("1_nv5t6")
 
 [node name="Player" parent="." instance=ExtResource("1_lkojk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3798, 9.24926, 27.5164)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.1656, 49.3288, 107.79)
 floor_stop_on_slope = false
 floor_max_angle = 1.48353
 
