@@ -2,9 +2,9 @@ extends CharacterBody3D
 
 const SPEED = 10.0
 const SPRINT_SPEED = 15.0
-const AIR_STRAFE_ACCELERATION = 500.0 # this is HUGE because of ????? 
+const AIR_STRAFE_ACCELERATION = 250.0 # this is HUGE because of ????? 
 const GROUND_ACCELERATION = 1000.0
-const SPEED_LIMIT = 1.2
+const SPEED_LIMIT = 0.8 # changes air speed
 const CROUCH_SPEED = 5.0
 const JUMP_VELOCITY = 5.5
 const SENSITIVITY = 0.003
@@ -39,8 +39,8 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-
-	if Input.is_action_pressed("jump") and is_on_floor(): # Handle jump
+	
+	if Input.is_action_just_pressed("jump") and is_on_floor(): # Handle jump
 		velocity.y = JUMP_VELOCITY
 	elif Input.is_action_just_pressed("jump") and is_on_wall_only() and wall_jump_count == 0: # Handle wall jump
 		velocity.y = JUMP_VELOCITY
