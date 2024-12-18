@@ -42,9 +42,9 @@ func _physics_process(delta: float) -> void:
 		velocity.z = lerp(velocity.z, (direction.z * SPRINT_SPEED), 0.05)
 	elif velocity.length() > CROUCH_SPEED and is_on_floor() and Input.is_action_pressed("crouch"): # check if crouching on ground with momentum, aka slide
 		# this checks if ground is flat or otherwise
-		var changingVelocity = 0.25 if (get_floor_normal() == Vector3.UP) or get_floor_angle()>deg_to_rad(40.0) else 0.9
+		var changingVelocity = 0.25 if (get_floor_normal() == Vector3.UP) or get_floor_angle()>deg_to_rad(60.0) else 0.9
 		# apply gravity (increased) to allow sliding on slopes, kinda, otherwise do nothing
-		velocity += Vector3.ZERO if (get_floor_normal() == Vector3.UP) or get_floor_angle()>deg_to_rad(40.0) else get_gravity()*1.2
+		velocity += Vector3.ZERO if (get_floor_normal() == Vector3.UP) or get_floor_angle()>deg_to_rad(60.0) else get_gravity()*1.2
 		# apply to velocity as normal, with modifiers
 		velocity.x = lerp(velocity.x, velocity.slide(get_floor_normal()).x*changingVelocity, 0.01)
 		velocity.z = lerp(velocity.z, velocity.slide(get_floor_normal()).z*changingVelocity, 0.01)
@@ -100,17 +100,6 @@ func crouch(crouchState: bool):
 				pass
 			else: # get bigger becaue not hittin yo head
 				$CollisionShape3D.shape.height = lerp($CollisionShape3D.shape.height, HEIGHT, 0.1)
-
-
-func checkValidFloorCollision() -> Vector3:
-	if get_last_slide_collision() == null:
-		return Vector3.ONE
-	#elif axis == "x":
-		#return get_last_slide_collision().get_normal().x
-	#elif axis == "z":
-		#return get_last_slide_collision().get_normal().z
-	else: return get_last_slide_collision().get_normal()
-	return Vector3.ZERO
 
 
 func updateDEBUGLabel(dir: Vector3) -> void: ##DEBUG
