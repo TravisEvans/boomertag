@@ -66,6 +66,13 @@ func load_game(game_scene_path):
 	get_tree().change_scene_to_file(game_scene_path)
 
 
+@rpc("call_local", "reliable")
+func create_player(peer_id):
+	var player = preload("res://Scenes/player.tscn")
+	#player.multiplayer.multiplayer_peer.get_unique_id()
+	get_tree().root.get_node("Game").add_child(player.instantiate())
+
+
 # Every peer will call this when they have loaded the game scene.
 @rpc("any_peer", "call_local", "reliable")
 func player_loaded():
@@ -80,6 +87,10 @@ func player_loaded():
 # This allows transfer of all desired data for each player, not only the unique ID.
 func _on_player_connected(id):
 	_register_player.rpc_id(id, player_info)
+	# Create the player on the server
+	create_player(id)
+	# create the player for each peer on the server
+	create_player.rpc(id)
 
 
 @rpc("any_peer", "reliable")

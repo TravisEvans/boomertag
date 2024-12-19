@@ -17,7 +17,8 @@ const CROUCH_HEIGHT = 1.2
 #@onready var cameraPivot = $CameraPivot # the "head" for rotation, idk check this for more info: https://docs.godotengine.org/en/4.0/tutorials/3d/using_transforms.html
 
 var wall_jump_count := 0
-
+var sync_interval := 0.1
+var time_since_last_sync := 0.0
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -30,7 +31,22 @@ func _unhandled_input(event): # originally yoinked from https://github.com/Legio
 
 
 func _physics_process(delta: float) -> void:
+	#if multiplayer.is_server(): # This is the server
 	
+	if get_multiplayer_authority() == multiplayer.get_unique_id(): # This is the local player
+		# Only the local player controls movement
+		handleMovementAndInput(delta)
+		time_since_last_sync += delta
+		if time_since_last_sync >= sync_interval:
+			sync_position()
+			time_since_last_sync = 0.0
+
+# END of _physics_process
+
+
+## MOVEMENT AND INPUT
+
+func handleMovementAndInput(delta) -> void:
 	if is_on_floor(): # reset wall jump count
 		wall_jump_count = 0
 	if is_on_wall_only():
@@ -97,8 +113,6 @@ func _physics_process(delta: float) -> void:
 	updateDEBUGLabel(direction) ##DEBUG
 	# I have no fucking clue how effective this is
 	move_and_slide()
-# END of _physics_process
-
 
 func crouch(crouchState: bool):
 	match crouchState:
@@ -112,10 +126,23 @@ func crouch(crouchState: bool):
 
 ## NETWORKING
 
-#@rpc("any_peer", "reliable")
-#func update_player_position(peer_id, position):
-	## Server updates position and broadcasts to all clients
+@rpc("any_peer", "reliable")
+func update_player_position(peer_id, new_position):
+	# The server receives this call, updates its state, and broadcasts it to all clients
+	if multiplayer.is_server():
+		# Ensure valid peer ID
+		if peer_id in get_tree().current_scene.get_node("Lobby").players:
+			position = new_position  # Update server's copy of the player's position
+			# Broadcast to all clients
+			update_player_position.rpc(peer_id, position)
+	else:
+		if multiplayer.get_unique_id() == peer_id: # Clients receive the server's updated position
+			position = new_position
 
+
+func sync_position():
+	# Notify the server of this player's position
+	update_player_position.rpc(multiplayer.get_unique_id(), position)
 
 ## DEBUG
 
