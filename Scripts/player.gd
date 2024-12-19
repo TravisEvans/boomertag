@@ -13,6 +13,7 @@ const CROUCH_HEIGHT = 1.2
 
 @onready var camera = $CameraPivot/Camera3D
 @onready var uiTempLabel = get_tree().current_scene.get_node("UI/HUD/Label") ##DEBUG
+@onready var uiLobbyLabel = get_tree().current_scene.get_node("UI/HUD/LobbyLabel") ##DEBUG
 #@onready var cameraPivot = $CameraPivot # the "head" for rotation, idk check this for more info: https://docs.godotengine.org/en/4.0/tutorials/3d/using_transforms.html
 
 var wall_jump_count := 0
@@ -88,6 +89,11 @@ func _physics_process(delta: float) -> void:
 		print("debugging")
 	if Input.is_action_just_pressed("debugAction"): ##DEBUG
 		velocity*=3
+	if Input.is_action_just_pressed("debugLobbyQuery"): ##DEBUG
+		print("Lobby debugging")
+	if Input.is_action_just_pressed("debugLobbyAction"): ##DEBUG
+		uiLobbyLabel.text += "
+		dummy text"
 	updateDEBUGLabel(direction) ##DEBUG
 	# I have no fucking clue how effective this is
 	move_and_slide()
@@ -104,6 +110,14 @@ func crouch(crouchState: bool):
 			else: # get bigger becaue not hittin yo head
 				$CollisionShape3D.shape.height = lerp($CollisionShape3D.shape.height, HEIGHT, 0.1)
 
+## NETWORKING
+
+#@rpc("any_peer", "reliable")
+#func update_player_position(peer_id, position):
+	## Server updates position and broadcasts to all clients
+
+
+## DEBUG
 
 func updateDEBUGLabel(dir: Vector3) -> void: ##DEBUG
 	uiTempLabel.text = "Current directional velocity: " + str(snapped(velocity.x, 0.01)) + ", " + str(snapped(velocity.z, 0.01)) + " 

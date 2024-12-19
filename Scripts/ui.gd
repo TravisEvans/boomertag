@@ -1,6 +1,10 @@
 extends CanvasLayer
 
 signal exit
+signal create_game
+signal start_game
+signal end_game
+signal join_game
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,3 +32,33 @@ func _on_exit_pressed() -> void:
 
 func _on_resume_pressed() -> void:
 	get_tree().reload_current_scene()
+
+
+func _on_create_lobby_pressed() -> void:
+	create_game.emit()
+
+
+func _on_end_lobby_pressed() -> void:
+	end_game.emit()
+
+
+func _on_join_lobby_pressed() -> void:
+	join_game.emit()
+
+
+func _on_start_lobby_pressed() -> void:
+	start_game.emit()
+
+
+func _on_lobby_player_connected(peer_id: Variant, player_info: Variant) -> void:
+	$HUD/LobbyLabel.text += "
+	player connected"
+
+
+func _on_lobby_player_disconnected(peer_id: Variant) -> void:
+	$HUD/LobbyLabel.text += "
+	player disconnected"
+
+func _on_lobby_server_disconnected() -> void:
+	$HUD/LobbyLabel.text += "
+	server disconnected"

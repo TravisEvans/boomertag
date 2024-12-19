@@ -20,6 +20,16 @@ offset_right = 163.0
 offset_bottom = 23.0
 text = "Demo text"
 
+[node name="LobbyLabel" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -479.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "Lobby Information:"
+
 [node name="CenterContainer" type="CenterContainer" parent="HUD"]
 layout_mode = 1
 anchors_preset = 8
@@ -38,7 +48,6 @@ grow_vertical = 2
 texture = ExtResource("2_jifps")
 
 [node name="Menu" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -82,5 +91,62 @@ offset_bottom = -141.0
 grow_vertical = 0
 text = "Resume aka restart"
 
+[node name="EndLobby" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -337.0
+offset_top = -881.0
+offset_right = -237.0
+offset_bottom = -841.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Exit"
+
+[node name="CreateLobby" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 300.0
+offset_top = -881.0
+offset_right = 459.0
+offset_bottom = -841.0
+grow_vertical = 0
+text = "$Lobby.create_game()"
+
+[node name="JoinLobby" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.0
+offset_top = 132.0
+offset_right = 126.0
+offset_bottom = 172.0
+grow_horizontal = 2
+text = "$Lobby.joingame(\"\")
+"
+
+[node name="StartLobby" type="Button" parent="Menu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.0
+offset_top = 455.0
+offset_right = 126.0
+offset_bottom = 495.0
+grow_horizontal = 2
+text = "$Lobby.load_game(\"res://Scenes/Game.tscn\")
+"
+
 [connection signal="pressed" from="Menu/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Menu/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Menu/EndLobby" to="." method="_on_end_lobby_pressed"]
+[connection signal="pressed" from="Menu/CreateLobby" to="." method="_on_create_lobby_pressed"]
+[connection signal="pressed" from="Menu/JoinLobby" to="." method="_on_join_lobby_pressed"]
+[connection signal="pressed" from="Menu/StartLobby" to="." method="_on_start_lobby_pressed"]
