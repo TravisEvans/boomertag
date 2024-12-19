@@ -32,13 +32,12 @@ func _unhandled_input(event): # originally yoinked from https://github.com/Legio
 
 func _physics_process(delta: float) -> void:
 	#if multiplayer.is_server(): # This is the server
-	
 	if get_multiplayer_authority() == multiplayer.get_unique_id(): # This is the local player???
 		# Only the local player controls movement
 		handleMovementAndInput(delta)
 		time_since_last_sync += delta
 		if time_since_last_sync >= sync_interval:
-			sync_position()
+			sync_position(delta)
 			time_since_last_sync = 0.0
 
 # END of _physics_process
@@ -127,29 +126,33 @@ func crouch(crouchState: bool):
 ## NETWORKING
 
 @rpc("any_peer", "reliable")
-func update_player_position(peer_id, new_position):
-	# The server receives this call, updates its state, and broadcasts it to all clients
-	if multiplayer.is_server():
-		print("hit server")
+func update_player_position(peer_id, new_position, new_rotation):
+	#if get_multiplayer_authority() == 1: # this means is server peer, see lobby.gd create_game()
 		# Ensure valid peer ID
-		if peer_id in get_tree().current_scene.get_node("Lobby").players:
-			position = new_position  # Update server's copy of the player's position
-			# Broadcast to all clients
-			update_player_position.rpc(peer_id, position)
+		position = new_position  # Update server's copy of the player's position
+		rotation = new_rotation
+		## Broadcast to all clients
+		#update_player_position.rpc(peer_id, new_position, new_rotation)
+	#else:
+		#var player = get_tree().root.get_node("Game/Lobby").players[peer_id] # Clients receive the server's updated position
+		#player.position = new_position
+		#player.rotation = new_rotation
+
+func sync_position(delta):
+	if multiplayer.is_server():
+		update_player_position(multiplayer.get_unique_id(), position, rotation)
+		update_player_position.rpc(multiplayer.get_unique_id(), position, rotation)
+		uiTempLabel.text = "host chad: " + str(delta)
 	else:
-		print("hit this one")
-		if multiplayer.get_unique_id() == peer_id: # Clients receive the server's updated position
-			position = new_position
-			print("hit333")
+		update_player_position(multiplayer.get_unique_id(), position, rotation)
+		update_player_position.rpc(multiplayer.get_unique_id(), position, rotation)
+		uiTempLabel.text = "client bitch: " + str(delta)
 
-
-func sync_position():
-	# Notify the server of this player's position
-	update_player_position.rpc(multiplayer.get_unique_id(), position)
 
 ## DEBUG
 
 func updateDEBUGLabel(dir: Vector3) -> void: ##DEBUG
-	uiTempLabel.text = "Current directional velocity: " + str(snapped(velocity.x, 0.01)) + ", " + str(snapped(velocity.z, 0.01)) + " 
-	Current absolute direction: " + str(snapped(dir.x,0.01)) + "," + str(snapped(dir.z,0.01)) + "
-	Current total velocity: " + str(snapped(velocity.length(), 0.01))
+	#uiTempLabel.text = "Current directional velocity: " + str(snapped(velocity.x, 0.01)) + ", " + str(snapped(velocity.z, 0.01)) + " 
+	#Current absolute direction: " + str(snapped(dir.x,0.01)) + "," + str(snapped(dir.z,0.01)) + "
+	#Current total velocity: " + str(snapped(velocity.length(), 0.01))
+	pass

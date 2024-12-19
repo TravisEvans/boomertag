@@ -65,13 +65,13 @@ func load_game(game_scene_path):
 	get_tree().change_scene_to_file(game_scene_path)
 
 
-@rpc("call_local", "reliable")
+@rpc("any_peer", "reliable")
 func create_player(peer_id):
 	var player = preload("res://Scenes/player.tscn").instantiate()
 	player.set_multiplayer_authority(peer_id)
 	player.name = str(peer_id)
 	player.position = Vector3.ZERO
-	get_tree().root.get_node("Game").add_child(player)
+	get_tree().root.get_node("Game/").add_child(player)
 	print("player created: " + str(peer_id))
 
 
@@ -103,7 +103,7 @@ func _register_player(new_player_info):
 
 
 func _on_player_disconnected(id):
-	get_tree().root.get_node("Game/" + str(id)).queue_free() 
+	get_tree().root.get_node("Game/" + str(id)).queue_free()
 	players.erase(id)
 	player_disconnected.emit(id)
 

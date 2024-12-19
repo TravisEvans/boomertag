@@ -13,12 +13,16 @@ config_version=5
 config/name="boomertag"
 run/main_scene="res://Scenes/Game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+boot_splash/bg_color=Color(0.308359, 0.0960163, 0.141857, 1)
+boot_splash/image="res://icon.png"
 
 [display]
 
 window/size/viewport_width=1800
 window/size/viewport_height=1013
+window/size/initial_position_type=4
 window/size/borderless=true
+window/vsync/vsync_mode=0
 
 [input]
 

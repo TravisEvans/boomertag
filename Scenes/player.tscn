@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwhixuig3yp8w"]
+[gd_scene load_steps=6 format=3 uid="uid://dwhixuig3yp8w"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_jr6bq"]
 
@@ -10,7 +10,11 @@ albedo_color = Color(1, 0.0588235, 0.0431373, 1)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_malhg"]
 material = SubResource("StandardMaterial3D_u6jfv")
 
+[sub_resource type="PrismMesh" id="PrismMesh_rbrcj"]
+size = Vector3(0.5, 1, 0.5)
+
 [node name="Player" type="CharacterBody3D"]
+auto_translate_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
 floor_max_angle = 0.872665
@@ -34,3 +38,8 @@ current = true
 
 [node name="Character" type="MeshInstance3D" parent="CharacterPivot"]
 mesh = SubResource("CapsuleMesh_malhg")
+
+[node name="Pointer" type="MeshInstance3D" parent="CharacterPivot"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.37441, 0)
+mesh = SubResource("PrismMesh_rbrcj")
+skeleton = NodePath("../Character")
