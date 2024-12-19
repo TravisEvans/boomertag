@@ -50,7 +50,6 @@ func create_game(): # This will create a 'Host' for the game, a server peer
 	if error:
 		return error
 	multiplayer.multiplayer_peer = peer
-	print(peer) ## DEBUG
 	players[1] = player_info
 	player_connected.emit(1, player_info)
 
@@ -68,9 +67,12 @@ func load_game(game_scene_path):
 
 @rpc("call_local", "reliable")
 func create_player(peer_id):
-	var player = preload("res://Scenes/player.tscn")
-	#player.multiplayer.multiplayer_peer.get_unique_id()
-	get_tree().root.get_node("Game").add_child(player.instantiate())
+	var player = preload("res://Scenes/player.tscn").instantiate()
+	player.set_multiplayer_authority(peer_id)
+	player.name = str(peer_id)
+	player.position = Vector3.ZERO
+	get_tree().root.get_node("Game").add_child(player)
+	print("player created: " + str(peer_id))
 
 
 # Every peer will call this when they have loaded the game scene.
@@ -101,6 +103,7 @@ func _register_player(new_player_info):
 
 
 func _on_player_disconnected(id):
+	get_tree().root.get_node("Game/" + str(id)).queue_free() 
 	players.erase(id)
 	player_disconnected.emit(id)
 

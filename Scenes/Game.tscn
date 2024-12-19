@@ -9,6 +9,9 @@
 [node name="Game" type="Node"]
 script = ExtResource("1_jyc1n")
 
+[node name="World" parent="." instance=ExtResource("4_2xka8")]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -18.4858, -16.8809, 31.4899)
+
 [node name="Lobby" parent="." instance=ExtResource("5_o7u0j")]
 
 [node name="Player" parent="." instance=ExtResource("2_wgbff")]
@@ -17,9 +20,6 @@ floor_stop_on_slope = false
 floor_max_angle = 1.48353
 
 [node name="UI" parent="." instance=ExtResource("3_p2r64")]
-
-[node name="World" parent="." instance=ExtResource("4_2xka8")]
-transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -18.4858, -16.8809, 31.4899)
 
 [connection signal="player_connected" from="Lobby" to="UI" method="_on_lobby_player_connected"]
 [connection signal="player_disconnected" from="Lobby" to="UI" method="_on_lobby_player_disconnected"]

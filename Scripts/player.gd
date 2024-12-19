@@ -33,7 +33,7 @@ func _unhandled_input(event): # originally yoinked from https://github.com/Legio
 func _physics_process(delta: float) -> void:
 	#if multiplayer.is_server(): # This is the server
 	
-	if get_multiplayer_authority() == multiplayer.get_unique_id(): # This is the local player
+	if get_multiplayer_authority() == multiplayer.get_unique_id(): # This is the local player???
 		# Only the local player controls movement
 		handleMovementAndInput(delta)
 		time_since_last_sync += delta
@@ -130,14 +130,17 @@ func crouch(crouchState: bool):
 func update_player_position(peer_id, new_position):
 	# The server receives this call, updates its state, and broadcasts it to all clients
 	if multiplayer.is_server():
+		print("hit server")
 		# Ensure valid peer ID
 		if peer_id in get_tree().current_scene.get_node("Lobby").players:
 			position = new_position  # Update server's copy of the player's position
 			# Broadcast to all clients
 			update_player_position.rpc(peer_id, position)
 	else:
+		print("hit this one")
 		if multiplayer.get_unique_id() == peer_id: # Clients receive the server's updated position
 			position = new_position
+			print("hit333")
 
 
 func sync_position():
