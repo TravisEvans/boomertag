@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dwhixuig3yp8w" path="res://Scenes/player.tscn" id="2_wgbff"]
 [ext_resource type="PackedScene" uid="uid://bk7vc2uakbucv" path="res://Scenes/ui.tscn" id="3_p2r64"]
 [ext_resource type="PackedScene" uid="uid://cs7vp46r7ie5d" path="res://Scenes/world.tscn" id="4_2xka8"]
-[ext_resource type="PackedScene" uid="uid://cdvede0y5e05c" path="res://Scenes/lobby.tscn" id="5_o7u0j"]
+[ext_resource type="PackedScene" uid="uid://cdvede0y5e05c" path="res://Scenes/server.tscn" id="5_o7u0j"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_jyc1n")
@@ -12,7 +12,7 @@ script = ExtResource("1_jyc1n")
 [node name="World" parent="." instance=ExtResource("4_2xka8")]
 transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -18.4858, -16.8809, 31.4899)
 
-[node name="Lobby" parent="." instance=ExtResource("5_o7u0j")]
+[node name="Server" parent="." instance=ExtResource("5_o7u0j")]
 
 [node name="Player" parent="." instance=ExtResource("2_wgbff")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.1656, 49.3288, 107.79)
@@ -21,10 +21,8 @@ floor_max_angle = 1.48353
 
 [node name="UI" parent="." instance=ExtResource("3_p2r64")]
 
-[connection signal="player_connected" from="Lobby" to="UI" method="_on_lobby_player_connected"]
-[connection signal="player_disconnected" from="Lobby" to="UI" method="_on_lobby_player_disconnected"]
-[connection signal="server_disconnected" from="Lobby" to="UI" method="_on_lobby_server_disconnected"]
 [connection signal="create_game" from="UI" to="." method="_on_ui_create_game"]
+[connection signal="crunch_changed" from="UI" to="Player" method="_on_ui_crunch_changed"]
 [connection signal="end_game" from="UI" to="." method="_on_ui_end_game"]
 [connection signal="exit" from="UI" to="." method="_on_ui_exit"]
 [connection signal="join_game" from="UI" to="." method="_on_ui_join_game"]

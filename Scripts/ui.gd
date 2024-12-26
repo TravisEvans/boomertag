@@ -5,6 +5,9 @@ signal create_game
 signal start_game
 signal end_game
 signal join_game
+signal crunch_changed(pixValue: float)
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -62,3 +65,7 @@ func _on_lobby_player_disconnected(peer_id: Variant) -> void:
 func _on_lobby_server_disconnected() -> void:
 	$HUD/LobbyLabel.text += "
 	server disconnected"
+
+
+func _on_h_slider_value_changed(pixValue: float) -> void:
+	crunch_changed.emit(pixValue)

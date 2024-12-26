@@ -11,41 +11,61 @@ const SENSITIVITY = 0.003
 const HEIGHT = 2.0
 const CROUCH_HEIGHT = 1.2
 
+
+@onready var cameraPivot = $CameraPivot
 @onready var camera = $CameraPivot/Camera3D
+@onready var pixCamera = $CameraPivot/SubViewportContainer/SubViewport/PixelCameraPivot/Camera3D
+@onready var pixCameraPivot = $CameraPivot/SubViewportContainer/SubViewport/PixelCameraPivot
 @onready var uiTempLabel = get_tree().current_scene.get_node("UI/HUD/Label") ##DEBUG
 @onready var uiLobbyLabel = get_tree().current_scene.get_node("UI/HUD/LobbyLabel") ##DEBUG
-#@onready var cameraPivot = $CameraPivot # the "head" for rotation, idk check this for more info: https://docs.godotengine.org/en/4.0/tutorials/3d/using_transforms.html
+
 
 var wall_jump_count := 0
-var sync_interval := 0.1
-var time_since_last_sync := 0.0
+var sync_interval := 0.0
+var time_since_last_sync := 0.01
+
+
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+
+
 func _unhandled_input(event): # originally yoinked from https://github.com/LegionGames/FirstPersonController
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * SENSITIVITY)
+		
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-85), deg_to_rad(85))
+		
+		pixCameraPivot.rotate_y(-event.relative.x * SENSITIVITY)
+		pixCamera.rotate_x(-event.relative.y * SENSITIVITY)
+		pixCamera.rotation.x = clamp(pixCamera.rotation.x, deg_to_rad(-85), deg_to_rad(85))
 
 
 func _physics_process(delta: float) -> void:
+	# Ensure pixCamera is stuck to player
+	if pixCamera.visible:
+		pixCameraPivot.global_position = global_position
 	#if multiplayer.is_server(): # This is the server
-	if get_multiplayer_authority() == multiplayer.get_unique_id(): # This is the local player???
+	#if get_multiplayer_authority() == multiplayer.get_unique_id(): # This is the local player???
 		# Only the local player controls movement
-		handleMovementAndInput(delta)
-		time_since_last_sync += delta
-		if time_since_last_sync >= sync_interval:
-			sync_position(delta)
-			time_since_last_sync = 0.0
+	handleMovementAndInput(delta)
+	#time_since_last_sync += delta
+	#if time_since_last_sync >= sync_interval:
+		#sync_position(delta)
+		#time_since_last_sync = 0.0
 
 # END of _physics_process
 
 
 ## MOVEMENT AND INPUT
 
+func _on_ui_crunch_changed(pixVal: float) -> void:
+	$CameraPivot/SubViewportContainer.stretch_shrink = pixVal
+
 func handleMovementAndInput(delta) -> void:
+	
 	if is_on_floor(): # reset wall jump count
 		wall_jump_count = 0
 	if is_on_wall_only():
@@ -113,6 +133,7 @@ func handleMovementAndInput(delta) -> void:
 	# I have no fucking clue how effective this is
 	move_and_slide()
 
+
 func crouch(crouchState: bool):
 	match crouchState:
 		true: # 1. move viewport down, 2. shrink collision box, 3. check if yo hittin yo head
@@ -123,30 +144,34 @@ func crouch(crouchState: bool):
 			else: # get bigger becaue not hittin yo head
 				$CollisionShape3D.shape.height = lerp($CollisionShape3D.shape.height, HEIGHT, 0.1)
 
+
+
 ## NETWORKING
 
 @rpc("any_peer", "reliable")
 func update_player_position(peer_id, new_position, new_rotation):
-	#if get_multiplayer_authority() == 1: # this means is server peer, see lobby.gd create_game()
-		# Ensure valid peer ID
-		position = new_position  # Update server's copy of the player's position
+	if multiplayer.is_server():
+		#only process updates if from client
+		if peer_id != multiplayer.get_unique_id(): #idk why, but the server will update all the shit FROM the client TO the server
+			position = new_position
+			rotation = new_rotation
+			# Broadcast to all clients
+			update_player_position.rpc(peer_id, new_position, new_rotation)
+	else:
+		# Clients don't need to update positions; just let the host handle it ????
+		position = new_position
 		rotation = new_rotation
-		## Broadcast to all clients
-		#update_player_position.rpc(peer_id, new_position, new_rotation)
-	#else:
-		#var player = get_tree().root.get_node("Game/Lobby").players[peer_id] # Clients receive the server's updated position
-		#player.position = new_position
-		#player.rotation = new_rotation
+
 
 func sync_position(delta):
-	if multiplayer.is_server():
+	if multiplayer.is_server(): ## Server does not need to sync its position redundantly
+		#uiTempLabel.text = "Host chad: " + str(multiplayer.get_unique_id())
 		update_player_position(multiplayer.get_unique_id(), position, rotation)
-		update_player_position.rpc(multiplayer.get_unique_id(), position, rotation)
-		uiTempLabel.text = "host chad: " + str(delta)
 	else:
-		update_player_position(multiplayer.get_unique_id(), position, rotation)
-		update_player_position.rpc(multiplayer.get_unique_id(), position, rotation)
-		uiTempLabel.text = "client bitch: " + str(delta)
+		# Clients send their position/rotation to the host
+		rpc_id(1, "update_player_position", multiplayer.get_unique_id(), position, rotation)
+		#uiTempLabel.text = "Client bich: " + str(multiplayer.get_unique_id())
+
 
 
 ## DEBUG

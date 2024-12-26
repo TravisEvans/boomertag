@@ -18,16 +18,17 @@ func _on_ui_exit() -> void:
 
 
 func _on_ui_start_game() -> void:
-	$Lobby.load_game.rpc("res://Scenes/Game.tscn")
+	#$Server.load_game.rpc("res://Scenes/Game.tscn")
+	get_tree().reload_current_scene()
 
-
-func _on_ui_join_game() -> void:
-	$Lobby.join_game("")
-
-
-func _on_ui_end_game() -> void:
-	$Lobby.remove_multiplayer_peer()
-
-
-func _on_ui_create_game() -> void:
-	$Lobby.create_game()
+#
+#func _on_ui_join_game() -> void:
+	#$Server.join_game("")
+#
+#
+#func _on_ui_end_game() -> void:
+	#$Server.remove_multiplayer_peer()
+#
+#
+#func _on_ui_create_game() -> void:
+	#$Server.create_game()
