@@ -26,4 +26,5 @@ floor_max_angle = 1.48353
 [connection signal="end_game" from="UI" to="." method="_on_ui_end_game"]
 [connection signal="exit" from="UI" to="." method="_on_ui_exit"]
 [connection signal="join_game" from="UI" to="." method="_on_ui_join_game"]
+[connection signal="postprocess_switched" from="UI" to="Player" method="_on_ui_postprocess_switched"]
 [connection signal="start_game" from="UI" to="." method="_on_ui_start_game"]

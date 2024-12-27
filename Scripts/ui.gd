@@ -6,6 +6,7 @@ signal start_game
 signal end_game
 signal join_game
 signal crunch_changed(pixValue: float)
+signal postprocess_switched()
 
 
 
@@ -69,3 +70,7 @@ func _on_lobby_server_disconnected() -> void:
 
 func _on_h_slider_value_changed(pixValue: float) -> void:
 	crunch_changed.emit(pixValue)
+
+
+func _on_button_pressed() -> void:
+	postprocess_switched.emit()

@@ -63,7 +63,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.913423, 0.00315078, 9.62615e-07, 0.533333)
+color = Color(1, 1, 1, 0)
 
 [node name="Exit" type="Button" parent="Menu"]
 layout_mode = 1
@@ -152,10 +152,22 @@ offset_left = 716.0
 offset_top = 880.0
 offset_right = 1072.0
 offset_bottom = 1007.0
+min_value = 1.0
 max_value = 10.0
+value = 1.0
 rounded = true
 tick_count = 10
 ticks_on_borders = true
+
+[node name="Button" type="Button" parent="Menu"]
+layout_mode = 0
+offset_left = 770.0
+offset_top = 861.0
+offset_right = 1010.0
+offset_bottom = 908.0
+toggle_mode = true
+button_pressed = true
+text = "postprocessing switch"
 
 [connection signal="pressed" from="Menu/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Menu/Resume" to="." method="_on_resume_pressed"]
@@ -164,3 +176,4 @@ ticks_on_borders = true
 [connection signal="pressed" from="Menu/JoinLobby" to="." method="_on_join_lobby_pressed"]
 [connection signal="pressed" from="Menu/StartLobby" to="." method="_on_start_lobby_pressed"]
 [connection signal="value_changed" from="Menu/HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="pressed" from="Menu/Button" to="." method="_on_button_pressed"]

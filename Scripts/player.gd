@@ -13,8 +13,8 @@ const CROUCH_HEIGHT = 1.2
 
 
 @onready var cameraPivot = $CameraPivot
-@onready var camera = $CameraPivot/Camera3D
-@onready var pixCamera = $CameraPivot/SubViewportContainer/SubViewport/PixelCameraPivot/Camera3D
+#@onready var camera = $CameraPivot/Camera3D
+@onready var pixCamera = $CameraPivot/SubViewportContainer/SubViewport/PixelCameraPivot/Camera
 @onready var pixCameraPivot = $CameraPivot/SubViewportContainer/SubViewport/PixelCameraPivot
 @onready var uiTempLabel = get_tree().current_scene.get_node("UI/HUD/Label") ##DEBUG
 @onready var uiLobbyLabel = get_tree().current_scene.get_node("UI/HUD/LobbyLabel") ##DEBUG
@@ -35,8 +35,8 @@ func _unhandled_input(event): # originally yoinked from https://github.com/Legio
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * SENSITIVITY)
 		
-		camera.rotate_x(-event.relative.y * SENSITIVITY)
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-85), deg_to_rad(85))
+		#camera.rotate_x(-event.relative.y * SENSITIVITY)
+		#camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-85), deg_to_rad(85))
 		
 		pixCameraPivot.rotate_y(-event.relative.x * SENSITIVITY)
 		pixCamera.rotate_x(-event.relative.y * SENSITIVITY)
@@ -59,10 +59,8 @@ func _physics_process(delta: float) -> void:
 # END of _physics_process
 
 
-## MOVEMENT AND INPUT
 
-func _on_ui_crunch_changed(pixVal: float) -> void:
-	$CameraPivot/SubViewportContainer.stretch_shrink = pixVal
+## MOVEMENT AND INPUT
 
 func handleMovementAndInput(delta) -> void:
 	
@@ -171,6 +169,17 @@ func sync_position(delta):
 		# Clients send their position/rotation to the host
 		rpc_id(1, "update_player_position", multiplayer.get_unique_id(), position, rotation)
 		#uiTempLabel.text = "Client bich: " + str(multiplayer.get_unique_id())
+
+
+
+## SIGNALS
+
+func _on_ui_postprocess_switched() -> void:
+	pixCamera.post_processing = !pixCamera.post_processing
+
+
+func _on_ui_crunch_changed(pixVal: float) -> void:
+	$CameraPivot/SubViewportContainer.stretch_shrink = pixVal
 
 
 

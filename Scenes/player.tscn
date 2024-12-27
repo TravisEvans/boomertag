@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwhixuig3yp8w"]
+[gd_scene load_steps=7 format=3 uid="uid://dwhixuig3yp8w"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_jr6bq"]
+[ext_resource type="PackedScene" uid="uid://cuh1yaoty6gvf" path="res://Scenes/camera.tscn" id="2_78atl"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_c0eee"]
 
@@ -31,10 +32,6 @@ shape = SubResource("CapsuleShape3D_c0eee")
 [node name="CameraPivot" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.478871, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-current = true
-fov = 90.0
-
 [node name="SubViewportContainer" type="SubViewportContainer" parent="CameraPivot"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,8 +48,8 @@ render_target_update_mode = 4
 [node name="PixelCameraPivot" type="Node3D" parent="CameraPivot/SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47887, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CameraPivot/SubViewportContainer/SubViewport/PixelCameraPivot"]
-current = true
+[node name="Camera" parent="CameraPivot/SubViewportContainer/SubViewport/PixelCameraPivot" instance=ExtResource("2_78atl")]
+projection = 0
 fov = 90.0
 
 [node name="CharacterPivot" type="Node3D" parent="."]
