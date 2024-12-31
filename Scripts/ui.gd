@@ -6,15 +6,17 @@ signal start_game
 signal end_game
 signal join_game
 signal crunch_changed(pixValue: float)
-signal postprocess_switched()
+signal postprocess_switched
 
+
+@onready var address_entry = $Menu/PanelContainer/MarginContainer/VBoxContainer/LineEdit
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$HUD.set_mouse_filter($HUD.MOUSE_FILTER_IGNORE)
-	$HUD.show()
-	$Menu.hide()
+	$HUD.hide()
+	$Menu.show()
 
 
  #Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,20 +54,6 @@ func _on_join_lobby_pressed() -> void:
 
 func _on_start_lobby_pressed() -> void:
 	start_game.emit()
-
-
-func _on_lobby_player_connected(peer_id: Variant, player_info: Variant) -> void:
-	$HUD/LobbyLabel.text += "
-	player connected"
-
-
-func _on_lobby_player_disconnected(peer_id: Variant) -> void:
-	$HUD/LobbyLabel.text += "
-	player disconnected"
-
-func _on_lobby_server_disconnected() -> void:
-	$HUD/LobbyLabel.text += "
-	server disconnected"
 
 
 func _on_h_slider_value_changed(pixValue: float) -> void:

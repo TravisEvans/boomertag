@@ -11,61 +11,40 @@ const SENSITIVITY = 0.003
 const HEIGHT = 2.0
 const CROUCH_HEIGHT = 1.2
 
-
-@onready var cameraPivot = $CameraPivot
-#@onready var camera = $CameraPivot/Camera3D
-@onready var pixCamera = $CameraPivot/SubViewportContainer/SubViewport/PixelCameraPivot/Camera
-@onready var pixCameraPivot = $CameraPivot/SubViewportContainer/SubViewport/PixelCameraPivot
-@onready var uiTempLabel = get_tree().current_scene.get_node("UI/HUD/Label") ##DEBUG
-@onready var uiLobbyLabel = get_tree().current_scene.get_node("UI/HUD/LobbyLabel") ##DEBUG
-
+@onready var camera = $Camera
 
 var wall_jump_count := 0
-var sync_interval := 0.0
-var time_since_last_sync := 0.01
 
+
+
+func _enter_tree():
+	set_multiplayer_authority(str(name).to_int())
 
 
 func _ready():
+	if not is_multiplayer_authority(): return
+	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	camera.current = true
 
 
-
-func _unhandled_input(event): # originally yoinked from https://github.com/LegionGames/FirstPersonController
+func _unhandled_input(event):
+	if not is_multiplayer_authority(): return
+	
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * SENSITIVITY)
-		
-		#camera.rotate_x(-event.relative.y * SENSITIVITY)
-		#camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-85), deg_to_rad(85))
-		
-		pixCameraPivot.rotate_y(-event.relative.x * SENSITIVITY)
-		pixCamera.rotate_x(-event.relative.y * SENSITIVITY)
-		pixCamera.rotation.x = clamp(pixCamera.rotation.x, deg_to_rad(-85), deg_to_rad(85))
+		camera.rotate_x(-event.relative.y * SENSITIVITY)
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-85), deg_to_rad(85))
 
 
-func _physics_process(delta: float) -> void:
-	# Ensure pixCamera is stuck to player
-	if pixCamera.visible:
-		pixCameraPivot.global_position = global_position
-	#if multiplayer.is_server(): # This is the server
-	#if get_multiplayer_authority() == multiplayer.get_unique_id(): # This is the local player???
-		# Only the local player controls movement
-	handleMovementAndInput(delta)
-	#time_since_last_sync += delta
-	#if time_since_last_sync >= sync_interval:
-		#sync_position(delta)
-		#time_since_last_sync = 0.0
-
-# END of _physics_process
-
-
-
-## MOVEMENT AND INPUT
-
-func handleMovementAndInput(delta) -> void:
+func _physics_process(delta):
+	if not is_multiplayer_authority(): return
 	
-	if is_on_floor(): # reset wall jump count
-		wall_jump_count = 0
+	# Add gravity
+	if not is_on_floor():
+		velocity += (get_gravity() * delta) if not is_on_wall() else (get_gravity() * delta)/1.375
+	#if is_on_floor(): # reset wall jump count
+		#wall_jump_count = 0
 	if is_on_wall_only():
 		velocity = velocity.slide(get_wall_normal())
 	
@@ -102,9 +81,6 @@ func handleMovementAndInput(delta) -> void:
 		velocity.x = move_toward(velocity.x, 0.0, 0.5)
 		velocity.z = move_toward(velocity.z, 0.0, 0.5)
 	
-	# Add gravity
-	if not is_on_floor():
-		velocity += (get_gravity() * delta) if not is_on_wall() else (get_gravity() * delta)/1.375
 	# Handle crouching position change
 	crouch(Input.is_action_pressed("crouch"))
 	
@@ -117,20 +93,13 @@ func handleMovementAndInput(delta) -> void:
 	# Apply strafe acceleration to velocity and then integrate motion
 	velocity += direction * accel
 	
-	
-	if Input.is_action_just_pressed("debugQuery"): ##DEBUG
-		print("debugging")
-	if Input.is_action_just_pressed("debugAction"): ##DEBUG
-		velocity*=3
-	if Input.is_action_just_pressed("debugLobbyQuery"): ##DEBUG
-		print("Lobby debugging")
-	if Input.is_action_just_pressed("debugLobbyAction"): ##DEBUG
-		uiLobbyLabel.text += "
-		dummy text"
-	updateDEBUGLabel(direction) ##DEBUG
-	# I have no fucking clue how effective this is
 	move_and_slide()
 
+# END of _physics_process
+
+
+
+## MOVEMENT AND INPUT
 
 func crouch(crouchState: bool):
 	match crouchState:
@@ -146,47 +115,40 @@ func crouch(crouchState: bool):
 
 ## NETWORKING
 
-@rpc("any_peer", "reliable")
-func update_player_position(peer_id, new_position, new_rotation):
-	if multiplayer.is_server():
-		#only process updates if from client
-		if peer_id != multiplayer.get_unique_id(): #idk why, but the server will update all the shit FROM the client TO the server
-			position = new_position
-			rotation = new_rotation
-			# Broadcast to all clients
-			update_player_position.rpc(peer_id, new_position, new_rotation)
-	else:
-		# Clients don't need to update positions; just let the host handle it ????
-		position = new_position
-		rotation = new_rotation
 
-
-func sync_position(delta):
-	if multiplayer.is_server(): ## Server does not need to sync its position redundantly
-		#uiTempLabel.text = "Host chad: " + str(multiplayer.get_unique_id())
-		update_player_position(multiplayer.get_unique_id(), position, rotation)
-	else:
-		# Clients send their position/rotation to the host
-		rpc_id(1, "update_player_position", multiplayer.get_unique_id(), position, rotation)
-		#uiTempLabel.text = "Client bich: " + str(multiplayer.get_unique_id())
+#@rpc("any_peer", "reliable")
+#func update_player_position(peer_id, new_position, new_rotation):
+	#pass
+#
+#
+#func sync_position(delta):
+	#pass
 
 
 
 ## SIGNALS
+## // NETWORKING
 
-func _on_ui_postprocess_switched() -> void:
-	pixCamera.post_processing = !pixCamera.post_processing
+#func _on_connected_ok
+	#
+#
+#func _on_connected_fail
 
 
-func _on_ui_crunch_changed(pixVal: float) -> void:
-	$CameraPivot/SubViewportContainer.stretch_shrink = pixVal
+## // OTHER
+
+#func _on_ui_postprocess_switched() -> void:
+	#camera.post_processing = !camera.post_processing
+#
+#
+#func _on_ui_crunch_changed(pixVal: float) -> void:
+	#$CameraPivot/SubViewportContainer.stretch_shrink = pixVal
 
 
 
 ## DEBUG
 
-func updateDEBUGLabel(dir: Vector3) -> void: ##DEBUG
+#func updateDEBUGLabel(dir: Vector3) -> void: ##DEBUG
 	#uiTempLabel.text = "Current directional velocity: " + str(snapped(velocity.x, 0.01)) + ", " + str(snapped(velocity.z, 0.01)) + " 
 	#Current absolute direction: " + str(snapped(dir.x,0.01)) + "," + str(snapped(dir.z,0.01)) + "
 	#Current total velocity: " + str(snapped(velocity.length(), 0.01))
-	pass

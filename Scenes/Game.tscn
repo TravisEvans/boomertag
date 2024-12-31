@@ -1,30 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://cf1u14h3eila2"]
+[gd_scene load_steps=4 format=3 uid="uid://cf1u14h3eila2"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_jyc1n"]
-[ext_resource type="PackedScene" uid="uid://dwhixuig3yp8w" path="res://Scenes/player.tscn" id="2_wgbff"]
 [ext_resource type="PackedScene" uid="uid://bk7vc2uakbucv" path="res://Scenes/ui.tscn" id="3_p2r64"]
 [ext_resource type="PackedScene" uid="uid://cs7vp46r7ie5d" path="res://Scenes/world.tscn" id="4_2xka8"]
-[ext_resource type="PackedScene" uid="uid://cdvede0y5e05c" path="res://Scenes/server.tscn" id="5_o7u0j"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_jyc1n")
 
 [node name="World" parent="." instance=ExtResource("4_2xka8")]
-transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -18.4858, -16.8809, 31.4899)
-
-[node name="Server" parent="." instance=ExtResource("5_o7u0j")]
-
-[node name="Player" parent="." instance=ExtResource("2_wgbff")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -93.1656, 49.3288, 107.79)
-floor_stop_on_slope = false
-floor_max_angle = 1.48353
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -18.4858, -2.45553, 31.4899)
 
 [node name="UI" parent="." instance=ExtResource("3_p2r64")]
 
-[connection signal="create_game" from="UI" to="." method="_on_ui_create_game"]
-[connection signal="crunch_changed" from="UI" to="Player" method="_on_ui_crunch_changed"]
-[connection signal="end_game" from="UI" to="." method="_on_ui_end_game"]
-[connection signal="exit" from="UI" to="." method="_on_ui_exit"]
-[connection signal="join_game" from="UI" to="." method="_on_ui_join_game"]
-[connection signal="postprocess_switched" from="UI" to="Player" method="_on_ui_postprocess_switched"]
-[connection signal="start_game" from="UI" to="." method="_on_ui_start_game"]
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/player.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="create_game" from="UI" to="." method="_on_host_button_pressed"]
+[connection signal="join_game" from="UI" to="." method="_on_join_button_pressed"]
