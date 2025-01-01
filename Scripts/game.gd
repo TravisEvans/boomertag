@@ -4,7 +4,6 @@ extends Node
 const Player = preload("res://Scenes/player.tscn")
 const PORT = 9999
 var peer = ENetMultiplayerPeer.new()
-var ip = ""
 
 @onready var address_entry = $UI/Menu/PanelContainer/MarginContainer/VBoxContainer/IPAddress
 
@@ -18,6 +17,7 @@ func _on_host_button_pressed():
 	add_player(multiplayer.get_unique_id()) # adding server player
 	
 	upnp_setup()
+
 
 func _on_join_button_pressed():
 	peer.create_client(address_entry.text, PORT)
@@ -33,7 +33,6 @@ func add_player(peer_id):
 func remove_player(peer_id):
 	var player = get_node_or_null(peer_id)
 	if player: player.queue_free()
-
 
 
 ## UPNP

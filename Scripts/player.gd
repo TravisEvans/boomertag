@@ -75,8 +75,8 @@ func _physics_process(delta):
 		velocity.x = lerp(velocity.x, (direction.x * CROUCH_SPEED), 0.1)
 		velocity.z = lerp(velocity.z, (direction.z * CROUCH_SPEED), 0.1)
 	elif direction and is_on_floor(): # check if moving on ground
-		velocity.x = lerp(velocity.x, (direction.x * SPEED), 0.05)
-		velocity.z = lerp(velocity.z, (direction.z * SPEED), 0.05)
+		velocity.x = lerp(velocity.x, (direction.x * SPEED), 0.1)
+		velocity.z = lerp(velocity.z, (direction.z * SPEED), 0.1)
 	elif is_on_floor(): # check if not moving on ground
 		velocity.x = move_toward(velocity.x, 0.0, 0.5)
 		velocity.z = move_toward(velocity.z, 0.0, 0.5)
