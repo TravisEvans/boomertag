@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dwhixuig3yp8w"]
+[gd_scene load_steps=9 format=3 uid="uid://dwhixuig3yp8w"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_jr6bq"]
 [ext_resource type="PackedScene" uid="uid://cuh1yaoty6gvf" path="res://Scenes/camera.tscn" id="2_gwfj1"]
@@ -25,6 +25,9 @@ properties/2/path = NodePath("Camera:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_t4xpl"]
+viewport_path = NodePath("SubViewportContainer/SubViewport")
+
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
 floor_max_angle = 0.872665
@@ -38,12 +41,6 @@ target_position = Vector3(0, 1.2, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_c0eee")
 
-[node name="Camera" parent="." instance=ExtResource("2_gwfj1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.477969, 0)
-projection = 0
-current = false
-fov = 90.0
-
 [node name="CharacterPivot" type="Node3D" parent="."]
 
 [node name="Character" type="MeshInstance3D" parent="CharacterPivot"]
@@ -56,3 +53,13 @@ skeleton = NodePath("../Character")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_o62b4")
+
+[node name="Camera" parent="." instance=ExtResource("2_gwfj1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.477969, 0)
+projection = 0
+current = false
+fov = 90.0
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.185412, 0.46354, -2.63612)
+texture = SubResource("ViewportTexture_t4xpl")

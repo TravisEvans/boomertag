@@ -111,27 +111,9 @@ text = "join server"
 layout_mode = 2
 text = "begin? server"
 
-[node name="LineEdit" type="LineEdit" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="IPAddress" type="LineEdit" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 placeholder_text = "ip addr"
-
-[node name="PostprocessButton" type="Button" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-toggle_mode = true
-button_pressed = true
-text = "postprocessing switch"
-
-[node name="Label" type="Label" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "pixel crunch (slider)"
-horizontal_alignment = 1
-
-[node name="HSlider" type="HSlider" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-min_value = 1.0
-max_value = 10.0
-value = 1.0
-rounded = true
 
 [connection signal="pressed" from="Menu/PanelContainer/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Menu/PanelContainer/MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
@@ -139,5 +121,3 @@ rounded = true
 [connection signal="pressed" from="Menu/PanelContainer/MarginContainer/VBoxContainer/CreateLobby" to="." method="_on_create_lobby_pressed"]
 [connection signal="pressed" from="Menu/PanelContainer/MarginContainer/VBoxContainer/JoinLobby" to="." method="_on_join_lobby_pressed"]
 [connection signal="pressed" from="Menu/PanelContainer/MarginContainer/VBoxContainer/StartLobby" to="." method="_on_start_lobby_pressed"]
-[connection signal="pressed" from="Menu/PanelContainer/MarginContainer/VBoxContainer/PostprocessButton" to="." method="_on_button_pressed"]
-[connection signal="value_changed" from="Menu/PanelContainer/MarginContainer/VBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]

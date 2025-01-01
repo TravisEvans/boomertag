@@ -4,18 +4,23 @@ extends Node
 const Player = preload("res://Scenes/player.tscn")
 const PORT = 9999
 var peer = ENetMultiplayerPeer.new()
+var ip = ""
+
+@onready var address_entry = $UI/Menu/PanelContainer/MarginContainer/VBoxContainer/IPAddress
 
 
 func _on_host_button_pressed():
 	peer.create_server(PORT)
 	multiplayer.multiplayer_peer = peer
 	multiplayer.peer_connected.connect(add_player)
+	multiplayer.peer_disconnected.connect(remove_player)
 	
 	add_player(multiplayer.get_unique_id()) # adding server player
-
+	
+	upnp_setup()
 
 func _on_join_button_pressed():
-	peer.create_client("localhost", PORT)
+	peer.create_client(address_entry.text, PORT)
 	multiplayer.multiplayer_peer = peer
 
 
@@ -25,62 +30,27 @@ func add_player(peer_id):
 	add_child(player)
 
 
-# When the server decides to start the game from a UI scene,
-# do Lobby.load_game.rpc(filepath)
-#@rpc("call_local", "reliable")
-#func load_game(game_scene_path):
-	#get_tree().change_scene_to_file(game_scene_path)
-
-
-# Every peer will call this when they have loaded the game scene.
-#@rpc("any_peer", "call_local", "reliable")
-#func player_loaded():
-	#if multiplayer.is_server():
-		#players_loaded += 1
-		#if players_loaded == players.size():
-			#$/root/Game.start_game()
-			#players_loaded = 0
-
-
-# When a peer connects, send them my player info.
-# This allows transfer of all desired data for each player, not only the unique ID.
-#func _on_player_connected(id):
-	#_register_player.rpc_id(id, player_info)
-	#print("Player joined: " + str(id) +", " + str(player_info))
+func remove_player(peer_id):
+	var player = get_node_or_null(peer_id)
+	if player: player.queue_free()
 
 
 
-#@rpc("any_peer", "reliable")
-#func _register_player(new_player_info):
-	#var new_player_id = multiplayer.get_remote_sender_id()
-	#players[new_player_id] = new_player_info
-	#player_connected.emit(new_player_id, new_player_info)
+## UPNP
 
-
-#func _on_player_disconnected(id):
-	#players.erase(id)
-	#player_disconnected.emit(id)
-	#print("Player left: " + str(id) +", " + str(player_info))
-
-
-#func _on_connected_ok():
-	#var peer_id = multiplayer.get_unique_id()
-	#players[peer_id] = player_info
-	#player_connected.emit(peer_id, player_info)
-	## spawn the player model (in host)
-	#print("Server joined")
-
-
-
-#func _on_connected_fail():
-	#multiplayer.multiplayer_peer = null
-
-
-#func _on_server_disconnected():
-	#multiplayer.multiplayer_peer = null
-	#players.clear()
-	#server_disconnected.emit()
-	#print("Server closed")
-
-
-## RECEIVED SIGNALS
+func upnp_setup():
+	var upnp = UPNP.new()
+	
+	var discover_result = upnp.discover()
+	assert(discover_result == UPNP.UPNP_RESULT_SUCCESS, \
+		"UPNP discover failed. Error %s" % discover_result)
+	
+	assert(upnp.get_gateway() and upnp.get_gateway().is_valid_gateway(), \
+		"UPNP invalid gateway.")
+	
+	var map_result = upnp.add_port_mapping(PORT)
+	assert(map_result == UPNP.UPNP_RESULT_SUCCESS, \
+		"UPNP port mapping failed. Error %s" % map_result)
+	
+	print("Success! Join Address: %s" % upnp.query_external_address())
+	

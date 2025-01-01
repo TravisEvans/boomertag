@@ -5,11 +5,8 @@ signal create_game
 signal start_game
 signal end_game
 signal join_game
-signal crunch_changed(pixValue: float)
-signal postprocess_switched
+#signal ip_edited(ip: String)
 
-
-@onready var address_entry = $Menu/PanelContainer/MarginContainer/VBoxContainer/LineEdit
 
 
 # Called when the node enters the scene tree for the first time.
@@ -54,11 +51,3 @@ func _on_join_lobby_pressed() -> void:
 
 func _on_start_lobby_pressed() -> void:
 	start_game.emit()
-
-
-func _on_h_slider_value_changed(pixValue: float) -> void:
-	crunch_changed.emit(pixValue)
-
-
-func _on_button_pressed() -> void:
-	postprocess_switched.emit()
