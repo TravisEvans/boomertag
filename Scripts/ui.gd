@@ -5,12 +5,15 @@ signal create_game
 signal start_game
 signal end_game
 signal join_game
+#signal ip_edited(ip: String)
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$HUD.set_mouse_filter($HUD.MOUSE_FILTER_IGNORE)
-	$HUD.show()
-	$Menu.hide()
+	$HUD.hide()
+	$Menu.show()
 
 
  #Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,17 +51,3 @@ func _on_join_lobby_pressed() -> void:
 
 func _on_start_lobby_pressed() -> void:
 	start_game.emit()
-
-
-func _on_lobby_player_connected(peer_id: Variant, player_info: Variant) -> void:
-	$HUD/LobbyLabel.text += "
-	player connected"
-
-
-func _on_lobby_player_disconnected(peer_id: Variant) -> void:
-	$HUD/LobbyLabel.text += "
-	player disconnected"
-
-func _on_lobby_server_disconnected() -> void:
-	$HUD/LobbyLabel.text += "
-	server disconnected"

@@ -1,12 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://bk7vc2uakbucv"]
+[gd_scene load_steps=6 format=3 uid="uid://bk7vc2uakbucv"]
 
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_ib83g"]
 [ext_resource type="Texture2D" uid="uid://bsscsb7hf1wmr" path="res://Textures/Sprites/crosshair179.png" id="2_jifps"]
+[ext_resource type="Shader" path="res://Scripts/Shaders/dither.gdshader" id="3_f8247"]
+
+[sub_resource type="Theme" id="Theme_hihbp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8eylj"]
+shader = ExtResource("3_f8247")
+shader_parameter/u_bit_depth = null
+shader_parameter/u_contrast = null
+shader_parameter/u_offset = null
+shader_parameter/u_dither_size = null
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_ib83g")
 
 [node name="HUD" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,99 +65,59 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_hihbp")
 
-[node name="ColorRect" type="ColorRect" parent="Menu"]
+[node name="PanelContainer" type="PanelContainer" parent="Menu"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 9
 anchor_bottom = 1.0
-grow_horizontal = 2
+offset_right = 179.0
 grow_vertical = 2
-color = Color(0.0901961, 0.564706, 0.482353, 0.533333)
 
-[node name="Exit" type="Button" parent="Menu"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -337.0
-offset_top = -181.0
-offset_right = -237.0
-offset_bottom = -141.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "Exit"
+[node name="MarginContainer" type="MarginContainer" parent="Menu/PanelContainer"]
+material = SubResource("ShaderMaterial_8eylj")
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
 
-[node name="Resume" type="Button" parent="Menu"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 300.0
-offset_top = -181.0
-offset_right = 400.0
-offset_bottom = -141.0
-grow_vertical = 0
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Resume" type="Button" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
 text = "Resume aka restart"
 
-[node name="EndLobby" type="Button" parent="Menu"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -351.0
-offset_top = -495.0
-offset_right = -251.0
-offset_bottom = -455.0
-grow_horizontal = 0
-grow_vertical = 0
+[node name="Exit" type="Button" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
 text = "Exit"
 
-[node name="CreateLobby" type="Button" parent="Menu"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 286.0
-offset_top = -495.0
-offset_right = 464.0
-offset_bottom = -455.0
-grow_vertical = 0
-text = "$Lobby.create_game()"
-
-[node name="JoinLobby" type="Button" parent="Menu"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -194.0
-offset_top = 89.0
-offset_right = -16.0
-offset_bottom = 129.0
-grow_horizontal = 2
-text = "$Lobby.joingame(\"\")
+[node name="EndLobby" type="Button" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "endlobby
 "
 
-[node name="StartLobby" type="Button" parent="Menu"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -5.0
-offset_top = 94.0
-offset_right = 353.0
-offset_bottom = 134.0
-grow_horizontal = 2
-text = "$Lobby.load_game(\"res://Scenes/Game.tscn\")
-"
+[node name="CreateLobby" type="Button" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "start server"
 
-[connection signal="pressed" from="Menu/Exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="Menu/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="Menu/EndLobby" to="." method="_on_end_lobby_pressed"]
-[connection signal="pressed" from="Menu/CreateLobby" to="." method="_on_create_lobby_pressed"]
-[connection signal="pressed" from="Menu/JoinLobby" to="." method="_on_join_lobby_pressed"]
-[connection signal="pressed" from="Menu/StartLobby" to="." method="_on_start_lobby_pressed"]
+[node name="JoinLobby" type="Button" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "join server"
+
+[node name="StartLobby" type="Button" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "begin? server"
+
+[node name="IPAddress" type="LineEdit" parent="Menu/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+placeholder_text = "ip addr"
+
+[connection signal="pressed" from="Menu/PanelContainer/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Menu/PanelContainer/MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Menu/PanelContainer/MarginContainer/VBoxContainer/EndLobby" to="." method="_on_end_lobby_pressed"]
+[connection signal="pressed" from="Menu/PanelContainer/MarginContainer/VBoxContainer/CreateLobby" to="." method="_on_create_lobby_pressed"]
+[connection signal="pressed" from="Menu/PanelContainer/MarginContainer/VBoxContainer/JoinLobby" to="." method="_on_join_lobby_pressed"]
+[connection signal="pressed" from="Menu/PanelContainer/MarginContainer/VBoxContainer/StartLobby" to="." method="_on_start_lobby_pressed"]
