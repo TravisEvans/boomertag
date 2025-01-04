@@ -15,6 +15,7 @@ so far there are many an idea for this, here is a quick dotpoint jumble
 - Equipment idea: auto crossbow
 - Equipment idea: blunderbuss duh
 - Equipment idea: some kind of hitscan funny gun
+- Equipment idea: fishing rod! swing!
 - Ordinance idea: water baloon that removes all friction like on ice
 - Ordinance idea: no grav nade
 - Ordinance idea: xtreeeeme grav nade
@@ -23,7 +24,7 @@ so far there are many an idea for this, here is a quick dotpoint jumble
 ## Planned development order
 
 ~~First things first, I want to make a world that isnt complete dogshit to look at.~~ Map making is not easy, so temporarily fixed.
-With a movement controller organised, and multiplayer functioning, there needs to be a tag mechanic, as in the main mechanic of the game. This seems somewhat pointless without a simple character model to animate. Therefore, the next major task is to create a character, or find one for a bandaid fix.............................
+With a movement controller organised, and multiplayer functioning, there needs to be a tag mechanic, as in the main mechanic of the game. This seems somewhat pointless without a simple character model to animate. ~~Therefore, the next major task is to create a character, or find one for a bandaid fix~~ This was easy, rigging is not, gotta learn to animate it.
 
 ## Current issues
 - stairs are an impossible KZ challenge
@@ -33,13 +34,17 @@ With a movement controller organised, and multiplayer functioning, there needs t
 - momentum feels off
 - UI is trash, and broken
 - there's no obvious control scheme?
+- ground is shiny
+- stairs are fucked
 
 ## Things to be added
 - Wall run? Maybe? I think so
 - equipment
 - ordinance
-- 
+- think mario cart 50, 100, 150cc, for diff speeds in diff games
+- game settings per round of the game
 - most other shit
+- maps fr fr
 
 ## Development areas
 - Tilemap development: Creation of assets for tilemaps.
