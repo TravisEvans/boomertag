@@ -12,6 +12,7 @@ const HEIGHT = 2.0
 const CROUCH_HEIGHT = 1.2
 
 @onready var camera = $Camera
+@onready var character_mesh = $CharacterPivot/Skeleton3D/Mesh
 
 var wall_jump_count := 0
 
@@ -23,7 +24,7 @@ func _enter_tree():
 
 func _ready():
 	if not is_multiplayer_authority(): return
-	
+	character_mesh.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera.current = true
 
