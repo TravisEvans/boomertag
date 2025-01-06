@@ -41,8 +41,6 @@ func _unhandled_input(event):
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
 	
-	print($CharacterPivot/Skeleton3D/PhysicalBoneSimulator3D/PhysicalBone3D/CollisionShape3D.rotation)
-	
 	 #Handle animations
 	if velocity.length() > 0:
 		$CharacterPivot/AnimationPlayer.play("run")
