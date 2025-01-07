@@ -15,6 +15,7 @@ const CROUCH_HEIGHT = 1.2
 @onready var character_mesh = $CharacterPivot/Skeleton3D/Mesh
 
 var wall_jump_count := 0
+var it := false
 
 
 
@@ -48,7 +49,8 @@ func _physics_process(delta):
 		$CharacterPivot/AnimationPlayer.queue("idle")
 	
 	if Input.is_action_just_pressed("m1"):
-		$CharacterPivot/AnimationPlayer.play("tag")
+		$CharacterPivot/AnimationPlayer.play("hooktag")
+	
 	
 	# Add gravity
 	if not is_on_floor():

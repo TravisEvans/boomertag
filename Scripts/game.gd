@@ -27,6 +27,7 @@ func _on_join_button_pressed():
 func add_player(peer_id):
 	var player = Player.instantiate()
 	player.name = str(peer_id)
+	player.collision_layer = 3
 	add_child(player)
 
 
