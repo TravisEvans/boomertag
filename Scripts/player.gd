@@ -12,8 +12,10 @@ const HEIGHT = 2.0
 const CROUCH_HEIGHT = 1.2
 
 @onready var camera = $Camera
+@onready var character_mesh = $CharacterPivot/Skeleton3D/Mesh
 
 var wall_jump_count := 0
+var it := false
 
 
 
@@ -23,7 +25,7 @@ func _enter_tree():
 
 func _ready():
 	if not is_multiplayer_authority(): return
-	
+	character_mesh.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera.current = true
 
@@ -39,6 +41,16 @@ func _unhandled_input(event):
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): return
+	
+	 #Handle animations
+	if velocity.length() > 0 and is_on_floor():
+		$CharacterPivot/AnimationPlayer.queue("run")
+	else:
+		$CharacterPivot/AnimationPlayer.queue("idle")
+	
+	if Input.is_action_just_pressed("m1"):
+		$CharacterPivot/AnimationPlayer.play("hooktag")
+	
 	
 	# Add gravity
 	if not is_on_floor():
@@ -110,45 +122,3 @@ func crouch(crouchState: bool):
 				pass
 			else: # get bigger becaue not hittin yo head
 				$CollisionShape3D.shape.height = lerp($CollisionShape3D.shape.height, HEIGHT, 0.1)
-
-
-
-## NETWORKING
-
-
-#@rpc("any_peer", "reliable")
-#func update_player_position(peer_id, new_position, new_rotation):
-	#pass
-#
-#
-#func sync_position(delta):
-	#pass
-
-
-
-## SIGNALS
-## // NETWORKING
-
-#func _on_connected_ok
-	#
-#
-#func _on_connected_fail
-
-
-## // OTHER
-
-#func _on_ui_postprocess_switched() -> void:
-	#camera.post_processing = !camera.post_processing
-#
-#
-#func _on_ui_crunch_changed(pixVal: float) -> void:
-	#$CameraPivot/SubViewportContainer.stretch_shrink = pixVal
-
-
-
-## DEBUG
-
-#func updateDEBUGLabel(dir: Vector3) -> void: ##DEBUG
-	#uiTempLabel.text = "Current directional velocity: " + str(snapped(velocity.x, 0.01)) + ", " + str(snapped(velocity.z, 0.01)) + " 
-	#Current absolute direction: " + str(snapped(dir.x,0.01)) + "," + str(snapped(dir.z,0.01)) + "
-	#Current total velocity: " + str(snapped(velocity.length(), 0.01))
