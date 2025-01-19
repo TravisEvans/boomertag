@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkhjqdd71hvm2"]
+
+[ext_resource type="Shader" path="res://vhswiggle.gdshader" id="1_eqcvn"]
+[ext_resource type="ArrayMesh" uid="uid://bs87runq5mlcv" path="res://Models/straftat/6.obj" id="2_k7ljk"]
+
+[sub_resource type="Environment" id="Environment_rdbbp"]
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0, 0, 0, 1)
+fog_sun_scatter = 1.0
+fog_density = 1.0
+fog_depth_curve = 0.41765
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_57nhs"]
+shader = ExtResource("1_eqcvn")
+shader_parameter/wiggle = 0.05
+shader_parameter/wiggle_speed = 25.0
+shader_parameter/smear = 1.0
+shader_parameter/blur_samples = 15
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rdbbp")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.38773)
+spot_range = 14.0
+spot_angle = 69.8459
+
+[node name="Camera3D" type="Camera3D" parent="."]
+current = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_57nhs")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.72, -7.46869, -15.745)
+mesh = ExtResource("2_k7ljk")
