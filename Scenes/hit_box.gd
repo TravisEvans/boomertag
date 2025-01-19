@@ -11,6 +11,8 @@ signal tagged
 
 func _ready():
 	area_shape_entered.connect(on_body_entered)
+	collision_layer = 2
+	collision_mask = 2
 
 func on_body_entered(area_rid: RID, area: Area3D, area_shape_index: int, local_shape_index: int):
 	if area.get_multiplayer_authority() != multiplayer.get_unique_id() and area.can_tag:

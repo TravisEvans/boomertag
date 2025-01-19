@@ -14,7 +14,6 @@ const CROUCH_HEIGHT = 1.2
 @onready var camera = $Camera
 @onready var character_mesh = $CharacterPivot/Skeleton3D/Mesh
 
-var wall_jump_count := 0
 var it := false
 
 
@@ -67,11 +66,6 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("jump") and is_on_floor(): # Handle jump
 		velocity.y = JUMP_VELOCITY
-	elif Input.is_action_just_pressed("jump") and is_on_wall_only() and wall_jump_count == 0: # Handle wall jump
-		velocity.y = JUMP_VELOCITY
-		velocity.x += (get_wall_normal().x*velocity.x)*0.5 if velocity.x>0 else -(get_wall_normal().x*velocity.x)*0.5
-		velocity.z += (get_wall_normal().z*velocity.z)*0.5 if velocity.z>0 else -(get_wall_normal().z*velocity.z)*0.5
-		wall_jump_count+=1
 	elif direction and Input.is_action_pressed("sprint") and is_on_floor() and !Input.is_action_pressed("crouch"): # check if sprinting on ground and NOT crouching
 		velocity.x = lerp(velocity.x, (direction.x * SPRINT_SPEED), 0.1)
 		velocity.z = lerp(velocity.z, (direction.z * SPRINT_SPEED), 0.1)
@@ -90,8 +84,8 @@ func _physics_process(delta):
 		velocity.x = lerp(velocity.x, (direction.x * SPEED), 0.1)
 		velocity.z = lerp(velocity.z, (direction.z * SPEED), 0.1)
 	elif is_on_floor(): # check if not moving on ground
-		velocity.x = move_toward(velocity.x, 0.0, 0.5)
-		velocity.z = move_toward(velocity.z, 0.0, 0.5)
+		velocity.x = lerp(velocity.x, 0.0, 0.35)
+		velocity.z = lerp(velocity.z, 0.0, 0.35)
 	
 	# Handle crouching position change
 	crouch(Input.is_action_pressed("crouch"))
