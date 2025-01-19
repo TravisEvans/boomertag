@@ -5,7 +5,7 @@ const Player = preload("res://Scenes/player.tscn")
 const PORT = 9999
 var peer = ENetMultiplayerPeer.new()
 
-@onready var address_entry = $UI/Menu/PanelContainer/MarginContainer/VBoxContainer/IPAddress
+@onready var address_entry = $UI/Menu/PanelContainerRight/MarginContainer/VBoxContainer/IPAddress
 
 
 func _on_host_button_pressed():
@@ -20,7 +20,7 @@ func _on_host_button_pressed():
 
 
 func _on_join_button_pressed():
-	peer.create_client(address_entry.text, PORT)
+	peer.create_client("localhost" if address_entry.text == "" else address_entry.text, PORT)
 	multiplayer.multiplayer_peer = peer
 
 
