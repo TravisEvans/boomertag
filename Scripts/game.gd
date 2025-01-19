@@ -32,8 +32,14 @@ func add_player(peer_id):
 
 
 func remove_player(peer_id):
-	var player = get_node_or_null(peer_id)
+	var player = get_node_or_null(str(peer_id))
 	if player: player.queue_free()
+
+
+func _on_ui_left_game() -> void:
+	peer.peer_disconnected.emit()
+	peer.close()
+
 
 
 ## UPNP

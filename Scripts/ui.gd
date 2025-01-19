@@ -1,10 +1,9 @@
 extends CanvasLayer
 
-signal exit
 signal create_game
 signal end_game
 signal join_game
-#signal ip_edited(ip: String)
+signal left_game
 
 
 
@@ -29,10 +28,11 @@ func _process(delta: float) -> void:
 
 
 func _on_exit_pressed() -> void:
-	exit.emit()
+	get_tree().quit()
 
 
 func _on_restart_pressed() -> void:
+	left_game.emit()
 	get_tree().reload_current_scene()
 
 
@@ -44,6 +44,7 @@ func _on_create_lobby_pressed() -> void:
 
 
 func _on_end_lobby_pressed() -> void:
+	left_game.emit()
 	end_game.emit()
 
 
@@ -52,6 +53,7 @@ func _on_join_lobby_pressed() -> void:
 	$Menu.hide()
 	$HUD.show()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 
 func _on_resume_pressed() -> void:
 	$Menu.hide()
