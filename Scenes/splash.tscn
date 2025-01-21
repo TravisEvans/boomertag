@@ -1,12 +1,29 @@
-[gd_scene load_steps=14 format=3 uid="uid://bkhjqdd71hvm2"]
+[gd_scene load_steps=15 format=3 uid="uid://bkhjqdd71hvm2"]
 
 [ext_resource type="Texture2D" uid="uid://bsp3dhd3bednr" path="res://Images/temp/Poliigon_ConcreteFloorPoured_7656/1K/Poliigon_ConcreteFloorPoured_7656_BaseColor.jpg" id="1_5o5de"]
 [ext_resource type="Shader" path="res://vhswiggle.gdshader" id="1_eqcvn"]
+[ext_resource type="Texture2D" uid="uid://bjub2hfys1t2r" path="res://Images/temp/Poliigon_ConcreteFloorPoured_7656/1K/Poliigon_ConcreteFloorPoured_7656_Normal.png" id="2_ewhm7"]
 [ext_resource type="ArrayMesh" uid="uid://bs87runq5mlcv" path="res://Models/straftat/6.obj" id="2_k7ljk"]
 [ext_resource type="Texture2D" uid="uid://txplq0xxamf4" path="res://Images/boomertext1-upscaled.png" id="3_k6rt6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uu5mx"]
 albedo_texture = ExtResource("1_5o5de")
+emission = Color(0.11, 0.0605, 0.0605, 1)
+normal_enabled = true
+normal_scale = 6.86
+normal_texture = ExtResource("2_ewhm7")
+rim = 0.09
+rim_tint = 1.0
+anisotropy = 1.0
+ao_light_affect = 1.0
+ao_texture = ExtResource("2_ewhm7")
+ao_on_uv2 = true
+subsurf_scatter_strength = 0.2
+backlight_enabled = true
+backlight = Color(0.46, 0, 0, 1)
+uv1_triplanar_sharpness = 29.422
+texture_filter = 0
+proximity_fade_distance = 0.01
 
 [sub_resource type="Animation" id="Animation_k05tv"]
 resource_name = "BTTextFloat"
@@ -156,10 +173,10 @@ _data = {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_57nhs"]
 shader = ExtResource("1_eqcvn")
-shader_parameter/wiggle = 0.05
-shader_parameter/wiggle_speed = 15.0
-shader_parameter/smear = 0.462
-shader_parameter/blur_samples = 10
+shader_parameter/wiggle = 0.08
+shader_parameter/wiggle_speed = 7.0
+shader_parameter/smear = 0.65
+shader_parameter/blur_samples = 3
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_bq7li"]
 viewport_path = NodePath("SubViewport")
