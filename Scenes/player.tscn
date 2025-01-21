@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b4d5uli1q3bcp" path="res://Models/Characters/Run Forward_1.png" id="6_toq2j"]
 [ext_resource type="Texture2D" uid="uid://b0e41j1llm3nh" path="res://Models/Characters/Run Forward_3.png" id="7_0hh2b"]
 [ext_resource type="Texture2D" uid="uid://wmo28w057w02" path="res://Models/Characters/Run Forward_9.png" id="8_cgw2v"]
-[ext_resource type="Script" path="res://Scenes/hit_box.gd" id="9_5g51u"]
+[ext_resource type="Script" path="res://Scripts/hit_box.gd" id="9_5g51u"]
 [ext_resource type="Animation" uid="uid://dowpvlc18qr1o" path="res://Models/Characters/Animations/idle.res" id="9_icycx"]
 [ext_resource type="Animation" uid="uid://dq35uu3ku5tk8" path="res://Models/Characters/Animations/hooktag.res" id="11_m2t66"]
 

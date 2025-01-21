@@ -15,6 +15,7 @@ so far there are many an idea for this, here is a quick dotpoint jumble
 - Equipment idea: auto crossbow
 - Equipment idea: blunderbuss duh
 - Equipment idea: some kind of hitscan funny gun
+- Equipment idea: fishing rod! swing!
 - Ordinance idea: water baloon that removes all friction like on ice
 - Ordinance idea: no grav nade
 - Ordinance idea: xtreeeeme grav nade
@@ -22,19 +23,28 @@ so far there are many an idea for this, here is a quick dotpoint jumble
 
 ## Planned development order
 
-First things first, I want to make a world that isnt complete dogshit to look at. I will get some ideas from LegionGames YT tutorials to learn better the map making within godot
-Post that, I would like to make a gun, to better understand the mechanics involved with raytracing and colliding with objects.
+~~First things first, I want to make a world that isnt complete dogshit to look at.~~ Map making is not easy, so temporarily fixed.
+With a movement controller organised, and multiplayer functioning, there needs to be a tag mechanic, as in the main mechanic of the game. This seems somewhat pointless without a simple character model to animate. ~~Therefore, the next major task is to create a character, or find one for a bandaid fix~~ This was easy, rigging is not, gotta learn to animate it.
 
 ## Current issues
-- You will hit your head when uncrouching
 - stairs are an impossible KZ challenge
-- Generation of TrenchBroom maps are somewhat complex and best kept VERY simple.
-> TrenchBroom maps also need textures, lest they are pure white with 600 surfaces
+- can not for the life of me get a simple pixel effect working on main viewport
+- theres no actual character models
+- no permission for current map usage (ahem, aboobies)
+- momentum feels off
+- UI is trash, and broken
+- there's no obvious control scheme?
+- ground is shiny
+- stairs are fucked
 
 ## Things to be added
-- Slide
 - Wall run? Maybe? I think so
-- ???????
+- equipment
+- ordinance
+- think mario cart 50, 100, 150cc, for diff speeds in diff games
+- game settings per round of the game
+- most other shit
+- maps fr fr
 
 ## Development areas
 - Tilemap development: Creation of assets for tilemaps.
@@ -42,10 +52,6 @@ Post that, I would like to make a gun, to better understand the mechanics involv
 - Sprite and asset development: the game needs sprites, characters, colours and shit
 > Not being done
 - Programming and scripting
-> Not being done
-- Fucking around in godot
-> SOOO being done - chab, and evan
+> chabis doing this
 - learning blendr, laigter, and krita
-> also being done, chab
-- I think learning TrenchBroom would be a great idea for mechanic garden prototyping
-> Not being done
+> also being done, chab (not really, probably next on the list)

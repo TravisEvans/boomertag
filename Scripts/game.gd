@@ -2,6 +2,7 @@ extends Node
 # Autoload named Lobby
 
 const Player = preload("res://Scenes/player.tscn")
+const World = preload("res://Scenes/world.tscn")
 const PORT = 9999
 var peer = ENetMultiplayerPeer.new()
 
@@ -14,6 +15,10 @@ func _on_host_button_pressed():
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
 	
+	# Create world
+	remove_child($Splash)
+	add_child(World.instantiate())
+	
 	add_player(multiplayer.get_unique_id()) # adding server player
 	
 	upnp_setup()
@@ -22,6 +27,11 @@ func _on_host_button_pressed():
 func _on_join_button_pressed():
 	peer.create_client("localhost" if address_entry.text == "" else address_entry.text, PORT)
 	multiplayer.multiplayer_peer = peer
+	
+	# Create world
+	remove_child($Splash)
+	add_child(World.instantiate()) ## ???
+
 
 
 func add_player(peer_id):

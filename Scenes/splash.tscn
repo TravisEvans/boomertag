@@ -1,0 +1,236 @@
+[gd_scene load_steps=12 format=3 uid="uid://bkhjqdd71hvm2"]
+
+[ext_resource type="Shader" path="res://vhswiggle.gdshader" id="1_eqcvn"]
+[ext_resource type="ArrayMesh" uid="uid://bs87runq5mlcv" path="res://Models/straftat/6.obj" id="2_k7ljk"]
+[ext_resource type="Texture2D" uid="uid://txplq0xxamf4" path="res://Images/boomertext1-upscaled.png" id="3_k6rt6"]
+
+[sub_resource type="Environment" id="Environment_rdbbp"]
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0, 0, 0, 1)
+fog_sun_scatter = 1.0
+fog_density = 1.0
+fog_depth_curve = 0.41765
+
+[sub_resource type="Animation" id="Animation_k05tv"]
+resource_name = "BTTextFloat"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BoomertagText:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-2.785, -0.25, 0, 0.25, 0, -2.785, -0.25, 0, 0.25, 0, -2.785, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2.5, 5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BoomertagText:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2.5, 5)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BoomertagText:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-7.88106, -0.25, 0, 0.25, 0, -7.881, -0.25, 0, 0.25, 0, -7.881, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2.5, 5)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BoomertagText:rotation:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.0872665, -0.25, 0, 0.25, 0, 0.0383972, -0.25, 0, 0.25, 0, -0.0680678, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.46667, 2.53333, 4.33333, 5)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BoomertagText:rotation:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0.0349066, -0.25, 0, 0.25, 0, -0.0349066, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.46667, 2.53333, 4.33333, 5)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BoomertagText:rotation:z")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 5)
+}
+
+[sub_resource type="Animation" id="Animation_13nf1"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BoomertagText:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-2.785, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BoomertagText:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BoomertagText:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-8.842, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BoomertagText:rotation:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.0872665, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BoomertagText:rotation:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BoomertagText:rotation:z")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xiegi"]
+_data = {
+"BTTextFloat": SubResource("Animation_k05tv"),
+"RESET": SubResource("Animation_13nf1")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_57nhs"]
+shader = ExtResource("1_eqcvn")
+shader_parameter/wiggle = 0.05
+shader_parameter/wiggle_speed = 15.0
+shader_parameter/smear = 0.462
+shader_parameter/blur_samples = 10
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_bq7li"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vaku5"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_bq7li")
+
+[sub_resource type="QuadMesh" id="QuadMesh_qtr66"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_vaku5")
+size = Vector2(1.92, 1.08)
+
+[node name="Splash" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rdbbp")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.38773)
+spot_range = 14.0
+spot_angle = 69.8459
+
+[node name="6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.72, -7.46869, -15.745)
+mesh = ExtResource("2_k7ljk")
+
+[node name="BoomertagText" type="Sprite3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.298858, -0.0261467, 0, 0.0261467, 0.298858, -2.785, 0, -8.842)
+texture = ExtResource("3_k6rt6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xiegi")
+}
+autoplay = "BTTextFloat"
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SubViewport"]
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport/CanvasLayer"]
+material = SubResource("ShaderMaterial_57nhs")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.1891, 1.19209e-07, 0.380987)
+mesh = SubResource("QuadMesh_qtr66")
+skeleton = NodePath("MeshCamera")
+
+[node name="MeshLight" type="SpotLight3D" parent="SubViewport/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0337505, -1.19209e-07, 0.697777)
+spot_range = 1.193
+spot_angle = 48.7062
+
+[node name="MeshCamera" type="Camera3D" parent="SubViewport/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.3051, -0.252129, 0.52086)
+fov = 89.2808
+
+[node name="MainCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.204, 1.19209e-07, 1.02661)
+current = true
+fov = 75.4476
