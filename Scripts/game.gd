@@ -6,7 +6,7 @@ const World = preload("res://Scenes/world.tscn")
 const PORT = 9999
 var peer = ENetMultiplayerPeer.new()
 
-@onready var address_entry = $UI/Menu/PanelContainerRight/MarginContainer/VBoxContainer/IPAddress
+@onready var address_entry = $UI/PauseMenu/PanelContainerRight/MarginContainer/VBoxContainer/IPAddress
 
 
 func _on_host_button_pressed():

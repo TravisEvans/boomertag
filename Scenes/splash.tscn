@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bkhjqdd71hvm2"]
+[gd_scene load_steps=17 format=3 uid="uid://bkhjqdd71hvm2"]
 
 [ext_resource type="Texture2D" uid="uid://bsp3dhd3bednr" path="res://Images/temp/Poliigon_ConcreteFloorPoured_7656/1K/Poliigon_ConcreteFloorPoured_7656_BaseColor.jpg" id="1_5o5de"]
 [ext_resource type="Shader" path="res://vhswiggle.gdshader" id="1_eqcvn"]
@@ -19,7 +19,6 @@ ao_light_affect = 1.0
 ao_texture = ExtResource("2_ewhm7")
 ao_on_uv2 = true
 subsurf_scatter_strength = 0.2
-backlight_enabled = true
 backlight = Color(0.46, 0, 0, 1)
 uv1_triplanar_sharpness = 29.422
 texture_filter = 0
@@ -191,12 +190,22 @@ material = SubResource("StandardMaterial3D_vaku5")
 size = Vector2(1.92, 1.08)
 
 [sub_resource type="Environment" id="Environment_rdbbp"]
+background_energy_multiplier = 0.0
 fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0, 0, 0, 1)
 fog_sun_scatter = 1.0
 fog_density = 1.0
 fog_depth_curve = 0.41765
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_58rka"]
+blend_mode = 3
+albedo_color = Color(0, 0, 0, 1)
+metallic_specular = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_eiop7"]
+material = SubResource("StandardMaterial3D_58rka")
+size = Vector2(500, 1000)
 
 [node name="Splash" type="Node3D"]
 
@@ -230,19 +239,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="TextCamera" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.674, -0.252129, 0.901847)
+fov = 89.2808
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.1891, 1.19209e-07, 0.380987)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -180.803, 1.19209e-07, 0.380987)
 mesh = SubResource("QuadMesh_qtr66")
-skeleton = NodePath("MeshCamera")
+skeleton = NodePath("../TextCamera")
 
 [node name="MeshLight" type="SpotLight3D" parent="SubViewport/MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0337505, -1.19209e-07, 0.697777)
 spot_range = 1.193
 spot_angle = 48.7062
-
-[node name="MeshCamera" type="Camera3D" parent="SubViewport/MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.5151, -0.252129, 0.52086)
-fov = 89.2808
 
 [node name="SpotLight3D" type="SpotLight3D" parent="SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.07387, 0, -1.38773)
@@ -252,7 +261,17 @@ spot_angle = 89.99
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport"]
 environment = SubResource("Environment_rdbbp")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport/WorldEnvironment"]
+transform = Transform3D(-0.878258, -0.150388, 0.453923, 0.059482, 0.907528, 0.415757, -0.474473, 0.392142, -0.788099, 31.8756, 29.8582, -25.4303)
+light_color = Color(0.14, 0.13951, 0.1106, 1)
+light_energy = 0.448
+sky_mode = 1
+
 [node name="MainCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.204, 1.19209e-07, 1.02661)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -180.818, 1.19209e-07, 1.02661)
 current = true
 fov = 75.4476
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-5.73206e-15, -1.31134e-07, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, 1.31134e-07, -149.275, 0, -8.44285)
+mesh = SubResource("QuadMesh_eiop7")

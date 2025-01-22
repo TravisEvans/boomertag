@@ -58,7 +58,8 @@ grow_vertical = 2
 [node name="Crosshair179" type="Sprite2D" parent="HUD/CenterContainer"]
 texture = ExtResource("2_jifps")
 
-[node name="Menu" type="Control" parent="."]
+[node name="PauseMenu" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -67,14 +68,14 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_hihbp")
 
-[node name="PanelContainerLeft" type="PanelContainer" parent="Menu"]
+[node name="PanelContainerLeft" type="PanelContainer" parent="PauseMenu"]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 179.0
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Menu/PanelContainerLeft"]
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu/PanelContainerLeft"]
 material = SubResource("ShaderMaterial_8eylj")
 layout_mode = 2
 theme_override_constants/margin_left = 15
@@ -82,23 +83,23 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/PanelContainerLeft/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainerLeft/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Resume" type="Button" parent="Menu/PanelContainerLeft/MarginContainer/VBoxContainer"]
+[node name="Resume" type="Button" parent="PauseMenu/PanelContainerLeft/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Resume"
 
-[node name="Restart" type="Button" parent="Menu/PanelContainerLeft/MarginContainer/VBoxContainer"]
+[node name="Restart" type="Button" parent="PauseMenu/PanelContainerLeft/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Reload Game"
 
-[node name="Exit" type="Button" parent="Menu/PanelContainerLeft/MarginContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="PauseMenu/PanelContainerLeft/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Exit to Desktop"
 
-[node name="PanelContainerRight" type="PanelContainer" parent="Menu"]
+[node name="PanelContainerRight" type="PanelContainer" parent="PauseMenu"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -108,7 +109,7 @@ offset_left = -189.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Menu/PanelContainerRight"]
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu/PanelContainerRight"]
 material = SubResource("ShaderMaterial_8eylj")
 layout_mode = 2
 theme_override_constants/margin_left = 15
@@ -116,30 +117,75 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/PanelContainerRight/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainerRight/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="CreateLobby" type="Button" parent="Menu/PanelContainerRight/MarginContainer/VBoxContainer"]
+[node name="CreateLobby" type="Button" parent="PauseMenu/PanelContainerRight/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Create Server"
 
-[node name="JoinLobby" type="Button" parent="Menu/PanelContainerRight/MarginContainer/VBoxContainer"]
+[node name="JoinLobby" type="Button" parent="PauseMenu/PanelContainerRight/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Join Lobby (from IP)"
 
-[node name="IPAddress" type="LineEdit" parent="Menu/PanelContainerRight/MarginContainer/VBoxContainer"]
+[node name="IPAddress" type="LineEdit" parent="PauseMenu/PanelContainerRight/MarginContainer/VBoxContainer"]
 layout_mode = 2
 placeholder_text = "IP address..."
 
-[node name="EndLobby" type="Button" parent="Menu/PanelContainerRight/MarginContainer/VBoxContainer"]
+[node name="EndLobby" type="Button" parent="PauseMenu/PanelContainerRight/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Exit Lobby
 "
 
-[connection signal="pressed" from="Menu/PanelContainerLeft/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="Menu/PanelContainerLeft/MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="Menu/PanelContainerLeft/MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="Menu/PanelContainerRight/MarginContainer/VBoxContainer/CreateLobby" to="." method="_on_create_lobby_pressed"]
-[connection signal="pressed" from="Menu/PanelContainerRight/MarginContainer/VBoxContainer/JoinLobby" to="." method="_on_join_lobby_pressed"]
-[connection signal="pressed" from="Menu/PanelContainerRight/MarginContainer/VBoxContainer/EndLobby" to="." method="_on_end_lobby_pressed"]
+[node name="MainMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="MainMenu"]
+custom_minimum_size = Vector2(720, 50)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -51.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="BoxContainer" type="BoxContainer" parent="MainMenu/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="CreateLobby" type="Button" parent="MainMenu/PanelContainer/MarginContainer/BoxContainer"]
+layout_mode = 2
+text = "Create Game"
+
+[node name="Options" type="Button" parent="MainMenu/PanelContainer/MarginContainer/BoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="Exit" type="Button" parent="MainMenu/PanelContainer/MarginContainer/BoxContainer"]
+layout_mode = 2
+text = "Close Game"
+flat = true
+
+[connection signal="pressed" from="PauseMenu/PanelContainerLeft/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="PauseMenu/PanelContainerLeft/MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="PauseMenu/PanelContainerLeft/MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="PauseMenu/PanelContainerRight/MarginContainer/VBoxContainer/CreateLobby" to="." method="_on_create_lobby_pressed"]
+[connection signal="pressed" from="PauseMenu/PanelContainerRight/MarginContainer/VBoxContainer/JoinLobby" to="." method="_on_join_lobby_pressed"]
+[connection signal="pressed" from="PauseMenu/PanelContainerRight/MarginContainer/VBoxContainer/EndLobby" to="." method="_on_end_lobby_pressed"]

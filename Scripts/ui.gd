@@ -11,19 +11,21 @@ signal left_game
 func _ready() -> void:
 	$HUD.set_mouse_filter($HUD.MOUSE_FILTER_IGNORE)
 	$HUD.hide()
-	$Menu.show()
+	$PauseMenu.hide()
+	$MainMenu.show()
 
 
  #Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if $MainMenu.visible: return
 	#Check for opening menu
-	if Input.is_action_just_pressed("menu") and !$Menu.visible:
+	if Input.is_action_just_pressed("menu") and !$PauseMenu.visible:
 		$HUD.hide()
-		$Menu.show()
+		$PauseMenu.show()
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	elif Input.is_action_just_pressed("menu") and $Menu.visible:
+	elif Input.is_action_just_pressed("menu") and $PauseMenu.visible:
 		$HUD.show()
-		$Menu.hide()
+		$PauseMenu.hide()
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
@@ -38,7 +40,7 @@ func _on_restart_pressed() -> void:
 
 func _on_create_lobby_pressed() -> void:
 	create_game.emit()
-	$Menu.hide()
+	$PauseMenu.hide()
 	$HUD.show()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -50,12 +52,12 @@ func _on_end_lobby_pressed() -> void:
 
 func _on_join_lobby_pressed() -> void:
 	join_game.emit()
-	$Menu.hide()
+	$PauseMenu.hide()
 	$HUD.show()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 func _on_resume_pressed() -> void:
-	$Menu.hide()
+	$PauseMenu.hide()
 	$HUD.show()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
