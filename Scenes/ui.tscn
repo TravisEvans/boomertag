@@ -165,23 +165,43 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 10
 
-[node name="BoxContainer" type="BoxContainer" parent="MainMenu/PanelContainer/MarginContainer"]
+[node name="BoxContainer" type="MenuBar" parent="MainMenu/PanelContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 25
-alignment = 1
 
 [node name="CreateLobby" type="Button" parent="MainMenu/PanelContainer/MarginContainer/BoxContainer"]
 layout_mode = 2
+offset_left = 725.0
+offset_right = 834.0
+offset_bottom = 31.0
 text = "Create Game"
+
+[node name="JoinLobby" type="Button" parent="MainMenu/PanelContainer/MarginContainer/BoxContainer"]
+layout_mode = 2
+offset_left = 859.0
+offset_right = 946.0
+offset_bottom = 31.0
+text = "Join Game"
 
 [node name="Options" type="Button" parent="MainMenu/PanelContainer/MarginContainer/BoxContainer"]
 layout_mode = 2
+offset_left = 971.0
+offset_right = 1041.0
+offset_bottom = 31.0
 text = "Options"
 
 [node name="Exit" type="Button" parent="MainMenu/PanelContainer/MarginContainer/BoxContainer"]
 layout_mode = 2
+offset_left = 1066.0
+offset_right = 1165.0
+offset_bottom = 31.0
 text = "Close Game"
 flat = true
+
+[node name="PopupMenu" type="PopupMenu" parent="MainMenu/PanelContainer/MarginContainer/BoxContainer"]
+mode = 2
+initial_position = 1
+
+[node name="PopupPanel" type="PopupPanel" parent="MainMenu/PanelContainer/MarginContainer/BoxContainer"]
 
 [connection signal="pressed" from="PauseMenu/PanelContainerLeft/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PauseMenu/PanelContainerLeft/MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
