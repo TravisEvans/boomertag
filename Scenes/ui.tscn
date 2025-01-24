@@ -1,9 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://bk7vc2uakbucv"]
+[gd_scene load_steps=23 format=3 uid="uid://bk7vc2uakbucv"]
 
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_ib83g"]
 [ext_resource type="Texture2D" uid="uid://bsscsb7hf1wmr" path="res://Textures/Sprites/crosshair179.png" id="2_jifps"]
 [ext_resource type="Shader" path="res://Scripts/Shaders/dither.gdshader" id="3_f8247"]
 [ext_resource type="FontFile" uid="uid://klvbjsq0w2y1" path="res://Misc Resources/Fonts/doomed/doomed.ttf" id="4_ldln4"]
+[ext_resource type="Texture2D" uid="uid://dkyso1nso42vx" path="res://Misc Resources/Images/thumbnail1.jpg" id="5_orltt"]
+[ext_resource type="Texture2D" uid="uid://lbedfq8axfx2" path="res://Misc Resources/Images/thumbnail2.jpg" id="6_lvdra"]
+[ext_resource type="Texture2D" uid="uid://dgdv062japk2m" path="res://Misc Resources/Images/thumbnail3.png" id="7_hynoo"]
 
 [sub_resource type="Theme" id="Theme_hihbp"]
 
@@ -54,6 +57,14 @@ thickness = 2
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ycm2f"]
 content_margin_top = 10.0
+
+[sub_resource type="Theme" id="Theme_cgk8a"]
+default_font_size = 20
+
+[sub_resource type="BoxMesh" id="BoxMesh_6g88m"]
+
+[sub_resource type="MeshTexture" id="MeshTexture_tdcvm"]
+mesh = SubResource("BoxMesh_6g88m")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tcfue"]
 content_margin_top = 10.0
@@ -198,7 +209,7 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.4
 anchor_top = 0.6
-anchor_right = 0.6
+anchor_right = 0.637
 anchor_bottom = 0.9
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MenuPromptsMarginContainer"]
@@ -216,6 +227,7 @@ mode = 2
 title = "Create Lobby"
 initial_position = 1
 size = Vector2i(1280, 720)
+visible = true
 min_size = Vector2i(1280, 720)
 
 [node name="RedOutline" type="ColorRect" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup"]
@@ -244,12 +256,14 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.298039, 0.298039, 0.298039, 1)
 
-[node name="LeftBorderMarginContainer" type="MarginContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control"]
+[node name="BorderMarginContainer" type="MarginContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.6
+anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 10
@@ -257,22 +271,22 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/LeftBorderMarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer"]
 layout_mode = 2
 
-[node name="MaxPlayerCount" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/LeftBorderMarginContainer/VBoxContainer"]
+[node name="MaxPlayerCount" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_3l8cq")
 text = "Maximum Players"
 
-[node name="SelectedMax" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/LeftBorderMarginContainer/VBoxContainer"]
+[node name="SelectedMax" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6laq7")
 text = "2 selected"
 
-[node name="HSlider" type="HSlider" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/LeftBorderMarginContainer/VBoxContainer"]
+[node name="HSlider" type="HSlider" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -285,32 +299,136 @@ value = 2.0
 tick_count = 11
 ticks_on_borders = true
 
-[node name="MaxPlayersHSliderLabels" type="HBoxContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/LeftBorderMarginContainer/VBoxContainer"]
+[node name="MaxPlayersHSliderLabels" type="HBoxContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="MinPlayers" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/LeftBorderMarginContainer/VBoxContainer/MaxPlayersHSliderLabels"]
+[node name="MinPlayers" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer/MaxPlayersHSliderLabels"]
 layout_mode = 2
 size_flags_horizontal = 2
 text = "2"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MaxPlayers" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/LeftBorderMarginContainer/VBoxContainer/MaxPlayersHSliderLabels"]
+[node name="MaxPlayers" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer/MaxPlayersHSliderLabels"]
 layout_mode = 2
 size_flags_horizontal = 10
 text = "12"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="GameSettings" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/LeftBorderMarginContainer/VBoxContainer"]
+[node name="GameSettings" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ycm2f")
 text = "Game Settings"
 
-[node name="MapSelection" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/LeftBorderMarginContainer/VBoxContainer"]
+[node name="SettingsLabels" type="HBoxContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_cgk8a")
+
+[node name="GameMode" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer/SettingsLabels"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Game Mode"
+
+[node name="Duration" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer/SettingsLabels"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Duration"
+
+[node name="Label" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer/SettingsLabels"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Score Limit"
+
+[node name="Settings" type="HBoxContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="GameModeList" type="ItemList" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer/Settings"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+auto_height = true
+item_count = 2
+same_column_width = true
+item_0/text = "King Maker"
+item_1/text = "Infected"
+item_1/icon = SubResource("MeshTexture_tdcvm")
+
+[node name="DurationList" type="ItemList" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer/Settings"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+auto_height = true
+item_count = 2
+same_column_width = true
+item_0/text = "King Maker"
+item_1/text = "Infected"
+item_1/icon = SubResource("MeshTexture_tdcvm")
+
+[node name="ScoreLimitList" type="ItemList" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer/Settings"]
+clip_contents = false
+layout_mode = 2
+size_flags_horizontal = 3
+auto_height = true
+item_count = 2
+same_column_width = true
+item_0/text = "King Maker"
+item_1/text = "Infected"
+item_1/icon = SubResource("MeshTexture_tdcvm")
+
+[node name="MapSelection" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_tcfue")
 text = "Map Selection"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="ItemList" type="ItemList" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+item_count = 8
+max_columns = 6
+same_column_width = true
+icon_mode = 0
+icon_scale = 0.35
+item_0/text = "map 1"
+item_0/icon = ExtResource("5_orltt")
+item_1/text = "map 2"
+item_1/icon = ExtResource("6_lvdra")
+item_2/text = "map 3"
+item_2/icon = ExtResource("7_hynoo")
+item_3/text = "Map 5"
+item_3/icon = ExtResource("5_orltt")
+item_4/text = "mAp6"
+item_4/icon = ExtResource("6_lvdra")
+item_5/text = "map 7"
+item_5/icon = ExtResource("5_orltt")
+item_6/text = "map 8"
+item_6/icon = ExtResource("6_lvdra")
+item_7/text = "map 9"
+item_7/icon = ExtResource("7_hynoo")
+
+[node name="StartOrClose" type="HBoxContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Start Game" type="Button" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer/StartOrClose"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tcfue")
+text = "Start Game"
+
+[node name="CloseLobbyMenu" type="Button" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer/StartOrClose"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tcfue")
+text = "Close Menu"
 
 [node name="JoinLobby" type="Button" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer"]
 layout_mode = 2
