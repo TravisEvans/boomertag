@@ -38,12 +38,16 @@ func _on_restart_pressed() -> void:
 	get_tree().reload_current_scene()
 
 
-func _on_create_lobby_pressed() -> void:
+func _on_start_game_pressed() -> void:
+	$MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup.hide()
+	$MainMenu.hide()
 	create_game.emit()
 	$PauseMenu.hide()
 	$HUD.show()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+
+## SERVER
 
 func _on_end_lobby_pressed() -> void:
 	left_game.emit()
@@ -61,3 +65,11 @@ func _on_resume_pressed() -> void:
 	$PauseMenu.hide()
 	$HUD.show()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+
+func _on_close_create_game_menu_pressed() -> void:
+	$MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup.hide()
+
+
+func _on_create_lobby_pressed() -> void:
+	$MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup.show()

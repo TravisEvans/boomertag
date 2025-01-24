@@ -190,10 +190,6 @@ theme_override_constants/margin_bottom = 15
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="CreateLobby" type="Button" parent="PauseMenu/PanelContainerRight/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Create Server"
-
 [node name="JoinLobby" type="Button" parent="PauseMenu/PanelContainerRight/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Join Lobby (from IP)"
@@ -208,6 +204,7 @@ text = "Exit Lobby
 "
 
 [node name="MainMenu" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -440,14 +437,14 @@ item_7/icon = ExtResource("7_hynoo")
 [node name="StartOrClose" type="HBoxContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Start Game" type="Button" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer/StartOrClose"]
+[node name="StartGame" type="Button" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer/StartOrClose"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 8
 theme_override_styles/normal = SubResource("StyleBoxEmpty_tcfue")
 text = "Start Game"
 
-[node name="CloseLobbyMenu" type="Button" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer/StartOrClose"]
+[node name="CloseCreateGameMenu" type="Button" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer/StartOrClose"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8
@@ -478,6 +475,8 @@ text = "EXIT"
 [connection signal="pressed" from="PauseMenu/PanelContainerLeft/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PauseMenu/PanelContainerLeft/MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="PauseMenu/PanelContainerLeft/MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="PauseMenu/PanelContainerRight/MarginContainer/VBoxContainer/CreateLobby" to="." method="_on_create_lobby_pressed"]
 [connection signal="pressed" from="PauseMenu/PanelContainerRight/MarginContainer/VBoxContainer/JoinLobby" to="." method="_on_join_lobby_pressed"]
 [connection signal="pressed" from="PauseMenu/PanelContainerRight/MarginContainer/VBoxContainer/EndLobby" to="." method="_on_end_lobby_pressed"]
+[connection signal="pressed" from="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby" to="." method="_on_create_lobby_pressed"]
+[connection signal="pressed" from="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer/StartOrClose/StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer/StartOrClose/CloseCreateGameMenu" to="." method="_on_close_create_game_menu_pressed"]
