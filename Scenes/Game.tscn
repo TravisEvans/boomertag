@@ -1,16 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://cf1u14h3eila2"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_jyc1n"]
+[ext_resource type="PackedScene" uid="uid://bkhjqdd71hvm2" path="res://Scenes/splash.tscn" id="2_okq7r"]
 [ext_resource type="PackedScene" uid="uid://bk7vc2uakbucv" path="res://Scenes/ui.tscn" id="3_p2r64"]
-[ext_resource type="PackedScene" uid="uid://cs7vp46r7ie5d" path="res://Scenes/world.tscn" id="4_2xka8"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_jyc1n")
 
-[node name="World" parent="." instance=ExtResource("4_2xka8")]
-transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -18.4858, -2.45553, 31.4899)
-
 [node name="UI" parent="." instance=ExtResource("3_p2r64")]
+
+[node name="Splash" parent="." instance=ExtResource("2_okq7r")]
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://Scenes/player.tscn")
@@ -18,3 +17,4 @@ spawn_path = NodePath("..")
 
 [connection signal="create_game" from="UI" to="." method="_on_host_button_pressed"]
 [connection signal="join_game" from="UI" to="." method="_on_join_button_pressed"]
+[connection signal="left_game" from="UI" to="." method="_on_ui_left_game"]

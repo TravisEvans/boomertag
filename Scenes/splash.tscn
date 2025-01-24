@@ -1,0 +1,287 @@
+[gd_scene load_steps=17 format=3 uid="uid://bkhjqdd71hvm2"]
+
+[ext_resource type="Texture2D" uid="uid://bsp3dhd3bednr" path="res://Misc Resources/Images/temp/Poliigon_ConcreteFloorPoured_7656/1K/Poliigon_ConcreteFloorPoured_7656_BaseColor.jpg" id="1_4lajq"]
+[ext_resource type="Shader" path="res://vhswiggle.gdshader" id="1_eqcvn"]
+[ext_resource type="Texture2D" uid="uid://bjub2hfys1t2r" path="res://Misc Resources/Images/temp/Poliigon_ConcreteFloorPoured_7656/1K/Poliigon_ConcreteFloorPoured_7656_Normal.png" id="2_ewhm7"]
+[ext_resource type="ArrayMesh" uid="uid://bs87runq5mlcv" path="res://Models/straftat/6.obj" id="2_k7ljk"]
+[ext_resource type="Texture2D" uid="uid://txplq0xxamf4" path="res://Misc Resources/Images/boomertext1-upscaled.png" id="3_k6rt6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uu5mx"]
+albedo_texture = ExtResource("1_4lajq")
+emission = Color(0.11, 0.0605, 0.0605, 1)
+normal_enabled = true
+normal_scale = 6.86
+normal_texture = ExtResource("2_ewhm7")
+rim = 0.09
+rim_tint = 1.0
+anisotropy = 1.0
+ao_light_affect = 1.0
+ao_texture = ExtResource("2_ewhm7")
+ao_on_uv2 = true
+subsurf_scatter_strength = 0.2
+backlight = Color(0.46, 0, 0, 1)
+uv1_triplanar_sharpness = 29.422
+texture_filter = 0
+proximity_fade_distance = 0.01
+
+[sub_resource type="Animation" id="Animation_k05tv"]
+resource_name = "BTTextFloat"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BoomertagText:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-2.785, -0.25, 0, 0.25, 0, -2.785, -0.25, 0, 0.25, 0, -2.785, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2.5, 5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BoomertagText:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.5, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2.5, 5)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BoomertagText:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-7.88106, -0.25, 0, 0.25, 0, -7.881, -0.25, 0, 0.25, 0, -7.881, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 2.5, 5)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BoomertagText:rotation:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.0872665, -0.25, 0, 0.25, 0, 0.0383972, -0.25, 0, 0.25, 0, -0.0680678, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.46667, 2.53333, 4.33333, 5)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BoomertagText:rotation:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0.0349066, -0.25, 0, 0.25, 0, -0.0349066, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.46667, 2.53333, 4.33333, 5)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BoomertagText:rotation:z")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 5)
+}
+
+[sub_resource type="Animation" id="Animation_13nf1"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BoomertagText:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-2.785, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BoomertagText:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BoomertagText:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-8.842, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BoomertagText:rotation:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.0872665, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("BoomertagText:rotation:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BoomertagText:rotation:z")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xiegi"]
+_data = {
+"BTTextFloat": SubResource("Animation_k05tv"),
+"RESET": SubResource("Animation_13nf1")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_58rka"]
+blend_mode = 3
+albedo_color = Color(0, 0, 0, 1)
+metallic_specular = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_eiop7"]
+material = SubResource("StandardMaterial3D_58rka")
+size = Vector2(500, 1000)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_57nhs"]
+shader = ExtResource("1_eqcvn")
+shader_parameter/wiggle = 0.08
+shader_parameter/wiggle_speed = 7.0
+shader_parameter/smear = 0.65
+shader_parameter/blur_samples = 3
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_bq7li"]
+viewport_path = NodePath("SubViewportContainer/SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vaku5"]
+resource_local_to_scene = true
+albedo_texture = SubResource("ViewportTexture_bq7li")
+
+[sub_resource type="QuadMesh" id="QuadMesh_qtr66"]
+resource_local_to_scene = true
+material = SubResource("StandardMaterial3D_vaku5")
+size = Vector2(1.92, 1.08)
+
+[sub_resource type="Environment" id="Environment_rdbbp"]
+background_energy_multiplier = 0.0
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0, 0, 0, 1)
+fog_sun_scatter = 1.0
+fog_density = 1.0
+fog_depth_curve = 0.41765
+
+[node name="Splash" type="Node3D"]
+
+[node name="6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.72, -7.46869, -15.745)
+material_override = SubResource("StandardMaterial3D_uu5mx")
+mesh = ExtResource("2_k7ljk")
+
+[node name="BoomertagText" type="Sprite3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.298858, -0.0261467, 0, 0.0261467, 0.298858, -2.785, 0, -8.842)
+texture = ExtResource("3_k6rt6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xiegi")
+}
+autoplay = "BTTextFloat"
+
+[node name="MainCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -180.818, 1.19209e-07, 1.02661)
+current = true
+fov = 75.4476
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-5.73206e-15, -1.31134e-07, -1, 1, -4.37114e-08, 0, -4.37114e-08, -1, 1.31134e-07, -149.275, 0, -8.44285)
+mesh = SubResource("QuadMesh_eiop7")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 3
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(640, 360)
+render_target_update_mode = 4
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport"]
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport/CanvasLayer"]
+material = SubResource("ShaderMaterial_57nhs")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextCamera" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.674, -0.252129, 0.901847)
+fov = 89.2808
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -180.803, 1.19209e-07, 0.380987)
+mesh = SubResource("QuadMesh_qtr66")
+skeleton = NodePath("../TextCamera")
+
+[node name="MeshLight" type="SpotLight3D" parent="SubViewportContainer/SubViewport/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0337505, -1.19209e-07, 0.697777)
+spot_range = 1.193
+spot_angle = 48.7062
+
+[node name="SpotLight3D" type="SpotLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.07387, 0, -1.38773)
+spot_range = 14.0
+spot_angle = 89.99
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
+environment = SubResource("Environment_rdbbp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/WorldEnvironment"]
+transform = Transform3D(-0.878258, -0.150388, 0.453923, 0.059482, 0.907528, 0.415757, -0.474473, 0.392142, -0.788099, 31.8756, 29.8582, -25.4303)
+light_color = Color(0.14, 0.13951, 0.1106, 1)
+light_energy = 0.448
+sky_mode = 1
