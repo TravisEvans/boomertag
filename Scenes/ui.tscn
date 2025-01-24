@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bk7vc2uakbucv"]
+[gd_scene load_steps=17 format=3 uid="uid://bk7vc2uakbucv"]
 
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_ib83g"]
 [ext_resource type="Texture2D" uid="uid://bsscsb7hf1wmr" path="res://Textures/Sprites/crosshair179.png" id="2_jifps"]
@@ -41,6 +41,22 @@ Button/styles/focus = SubResource("StyleBoxFlat_i5tkk")
 Button/styles/hover = SubResource("StyleBoxFlat_65pc4")
 Button/styles/normal = SubResource("StyleBoxFlat_wkjkv")
 Button/styles/pressed = SubResource("StyleBoxFlat_uir62")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3l8cq"]
+content_margin_top = 10.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6laq7"]
+content_margin_left = 5.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_gjjg4"]
+color = Color(0.46, 0.0414, 0.0483766, 1)
+thickness = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ycm2f"]
+content_margin_top = 10.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tcfue"]
+content_margin_top = 10.0
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_ib83g")
@@ -177,7 +193,7 @@ grow_vertical = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_2mwv1")
 
-[node name="MarginContainer" type="MarginContainer" parent="MainMenu"]
+[node name="MenuPromptsMarginContainer" type="MarginContainer" parent="MainMenu"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.4
@@ -185,24 +201,32 @@ anchor_top = 0.6
 anchor_right = 0.6
 anchor_bottom = 0.9
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MenuPromptsMarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 15
 alignment = 1
 
-[node name="CreateLobby" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
+[node name="CreateLobby" type="Button" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "CREATE LOBBY"
-flat = true
 
-[node name="Popup" type="Popup" parent="MainMenu/MarginContainer/VBoxContainer/CreateLobby"]
+[node name="LobbyPopup" type="Popup" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby"]
+mode = 2
 title = "Create Lobby"
 initial_position = 1
-size = Vector2i(300, 250)
-min_size = Vector2i(300, 250)
+size = Vector2i(1280, 720)
+min_size = Vector2i(1280, 720)
 
-[node name="Control" type="Control" parent="MainMenu/MarginContainer/VBoxContainer/CreateLobby/Popup"]
+[node name="RedOutline" type="ColorRect" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0.0166664, 0.25098)
+
+[node name="Control" type="Control" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -210,35 +234,104 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="MainMenu/MarginContainer/VBoxContainer/CreateLobby/Popup/Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="GreyBox" type="ColorRect" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control"]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 1270.0
+offset_bottom = 710.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.393824, 0.196673, 0.308099, 1)
+color = Color(0.298039, 0.298039, 0.298039, 1)
 
-[node name="JoinLobby" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
+[node name="LeftBorderMarginContainer" type="MarginContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.6
+anchor_bottom = 1.0
+offset_left = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/LeftBorderMarginContainer"]
+layout_mode = 2
+
+[node name="MaxPlayerCount" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/LeftBorderMarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3l8cq")
+text = "Maximum Players"
+
+[node name="SelectedMax" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/LeftBorderMarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6laq7")
+text = "2 selected"
+
+[node name="HSlider" type="HSlider" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/LeftBorderMarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.01
+theme_override_styles/slider = SubResource("StyleBoxLine_gjjg4")
+min_value = 2.0
+max_value = 12.0
+value = 2.0
+tick_count = 11
+ticks_on_borders = true
+
+[node name="MaxPlayersHSliderLabels" type="HBoxContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/LeftBorderMarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MinPlayers" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/LeftBorderMarginContainer/VBoxContainer/MaxPlayersHSliderLabels"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MaxPlayers" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/LeftBorderMarginContainer/VBoxContainer/MaxPlayersHSliderLabels"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "12"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameSettings" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/LeftBorderMarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ycm2f")
+text = "Game Settings"
+
+[node name="MapSelection" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/LeftBorderMarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tcfue")
+text = "Map Selection"
+
+[node name="JoinLobby" type="Button" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "JOIN LOBBY"
 
-[node name="Popup" type="Popup" parent="MainMenu/MarginContainer/VBoxContainer/JoinLobby"]
+[node name="Popup" type="Popup" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby"]
 
-[node name="Options" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
+[node name="Options" type="Button" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "OPTIONS"
 
-[node name="Popup" type="Popup" parent="MainMenu/MarginContainer/VBoxContainer/Options"]
+[node name="Popup" type="Popup" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options"]
 
-[node name="Exit" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "EXIT"
 
-[node name="Popup" type="Popup" parent="MainMenu/MarginContainer/VBoxContainer/Exit"]
+[node name="Popup" type="Popup" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Exit"]
 
 [connection signal="pressed" from="PauseMenu/PanelContainerLeft/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PauseMenu/PanelContainerLeft/MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
