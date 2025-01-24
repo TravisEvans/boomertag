@@ -52,7 +52,7 @@ content_margin_top = 10.0
 content_margin_left = 5.0
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_gjjg4"]
-color = Color(0.46, 0.0414, 0.0483766, 1)
+color = Color(0.501961, 0, 0, 1)
 thickness = 2
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ycm2f"]
@@ -68,9 +68,9 @@ default_font_size = 20
 [sub_resource type="Theme" id="Theme_emkcn"]
 default_font = ExtResource("4_ldln4")
 default_font_size = 20
-ItemList/colors/font_color = Color(0.88, 0.2904, 0.300227, 1)
-ItemList/colors/font_hovered_color = Color(0.95, 0.95, 0.95, 1)
-ItemList/colors/font_selected_color = Color(1, 1, 1, 1)
+ItemList/colors/font_color = Color(1, 0.501961, 0.501961, 1)
+ItemList/colors/font_hovered_color = Color(1, 1, 1, 1)
+ItemList/colors/font_selected_color = Color(1, 0, 0, 1)
 ItemList/styles/hovered = SubResource("StyleBoxFlat_a80ss")
 ItemList/styles/selected = SubResource("StyleBoxFlat_y2g11")
 
@@ -249,7 +249,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(1, 0, 0.0166664, 0.25098)
+color = Color(1, 0, 0, 0.294118)
 
 [node name="Control" type="Control" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup"]
 layout_mode = 3
