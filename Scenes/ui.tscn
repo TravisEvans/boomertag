@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk7vc2uakbucv"]
+[gd_scene load_steps=11 format=3 uid="uid://bk7vc2uakbucv"]
 
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_ib83g"]
 [ext_resource type="Texture2D" uid="uid://bsscsb7hf1wmr" path="res://Textures/Sprites/crosshair179.png" id="2_jifps"]
 [ext_resource type="Shader" path="res://Scripts/Shaders/dither.gdshader" id="3_f8247"]
+[ext_resource type="FontFile" uid="uid://klvbjsq0w2y1" path="res://Misc Resources/Fonts/doomed/doomed.ttf" id="4_ldln4"]
 
 [sub_resource type="Theme" id="Theme_hihbp"]
 
@@ -12,6 +13,27 @@ shader_parameter/u_bit_depth = null
 shader_parameter/u_contrast = null
 shader_parameter/u_offset = null
 shader_parameter/u_dither_size = null
+
+[sub_resource type="GDScript" id="GDScript_qlx43"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_65pc4"]
+draw_center = false
+border_width_bottom = 3
+border_color = Color(1, 0, 0, 0.658824)
+border_blend = true
+script = SubResource("GDScript_qlx43")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkjkv"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+draw_center = false
+
+[sub_resource type="Theme" id="Theme_2mwv1"]
+default_font = ExtResource("4_ldln4")
+default_font_size = 30
+Button/colors/font_color = Color(1, 0.18252, 0.134187, 1)
+Button/colors/font_hover_color = Color(1, 0, 0, 1)
+Button/styles/hover = SubResource("StyleBoxFlat_65pc4")
+Button/styles/normal = SubResource("StyleBoxFlat_wkjkv")
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_ib83g")
@@ -146,62 +168,72 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
+theme = SubResource("Theme_2mwv1")
 
-[node name="PanelContainer" type="PanelContainer" parent="MainMenu"]
-custom_minimum_size = Vector2(720, 50)
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu"]
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -51.0
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.6
+anchor_right = 0.5
+anchor_bottom = 0.9
+offset_left = -13.0601
+offset_right = 13.4399
+offset_bottom = -6.10352e-05
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="MainMenu/PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MarginContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 10
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+alignment = 1
 
-[node name="BoxContainer" type="MenuBar" parent="MainMenu/PanelContainer/MarginContainer"]
+[node name="CreateLobby" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
+text = "CREATE LOBBY"
 
-[node name="CreateLobby" type="Button" parent="MainMenu/PanelContainer/MarginContainer/BoxContainer"]
-layout_mode = 2
-offset_left = 725.0
-offset_right = 834.0
-offset_bottom = 31.0
-text = "Create Game"
-
-[node name="JoinLobby" type="Button" parent="MainMenu/PanelContainer/MarginContainer/BoxContainer"]
-layout_mode = 2
-offset_left = 859.0
-offset_right = 946.0
-offset_bottom = 31.0
-text = "Join Game"
-
-[node name="Options" type="Button" parent="MainMenu/PanelContainer/MarginContainer/BoxContainer"]
-layout_mode = 2
-offset_left = 971.0
-offset_right = 1041.0
-offset_bottom = 31.0
-text = "Options"
-
-[node name="Exit" type="Button" parent="MainMenu/PanelContainer/MarginContainer/BoxContainer"]
-layout_mode = 2
-offset_left = 1066.0
-offset_right = 1165.0
-offset_bottom = 31.0
-text = "Close Game"
-flat = true
-
-[node name="PopupMenu" type="PopupMenu" parent="MainMenu/PanelContainer/MarginContainer/BoxContainer"]
-mode = 2
+[node name="Popup" type="Popup" parent="MainMenu/MarginContainer/VBoxContainer/CreateLobby"]
+title = "Create Lobby"
 initial_position = 1
+size = Vector2i(300, 250)
+visible = true
+min_size = Vector2i(300, 250)
 
-[node name="PopupPanel" type="PopupPanel" parent="MainMenu/PanelContainer/MarginContainer/BoxContainer"]
+[node name="Control" type="Control" parent="MainMenu/MarginContainer/VBoxContainer/CreateLobby/Popup"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="MainMenu/MarginContainer/VBoxContainer/CreateLobby/Popup/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.393824, 0.196673, 0.308099, 1)
+
+[node name="JoinLobby" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "JOIN LOBBY"
+
+[node name="Popup" type="Popup" parent="MainMenu/MarginContainer/VBoxContainer/JoinLobby"]
+
+[node name="Options" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "OPTIONS"
+
+[node name="Popup" type="Popup" parent="MainMenu/MarginContainer/VBoxContainer/Options"]
+
+[node name="Exit" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "EXIT"
+
+[node name="Popup" type="Popup" parent="MainMenu/MarginContainer/VBoxContainer/Exit"]
 
 [connection signal="pressed" from="PauseMenu/PanelContainerLeft/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PauseMenu/PanelContainerLeft/MarginContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]

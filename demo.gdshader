@@ -9,6 +9,6 @@ void fragment() {
 	unit.y = cos(theta) * -1.0;
 	unit.z = cos(phi) * sin(theta);
 	unit = normalize(unit);
-	
+
 	COLOR = vec4(unit, 1.0);
 }
