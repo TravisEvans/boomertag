@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bk7vc2uakbucv"]
+[gd_scene load_steps=12 format=3 uid="uid://bk7vc2uakbucv"]
 
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_ib83g"]
 [ext_resource type="Texture2D" uid="uid://bsscsb7hf1wmr" path="res://Textures/Sprites/crosshair179.png" id="2_jifps"]
@@ -14,26 +14,34 @@ shader_parameter/u_contrast = null
 shader_parameter/u_offset = null
 shader_parameter/u_dither_size = null
 
-[sub_resource type="GDScript" id="GDScript_qlx43"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5tkk"]
+draw_center = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_65pc4"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 draw_center = false
 border_width_bottom = 3
 border_color = Color(1, 0, 0, 0.658824)
-border_blend = true
-script = SubResource("GDScript_qlx43")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wkjkv"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 draw_center = false
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uir62"]
+draw_center = false
+border_width_bottom = 3
+border_color = Color(1, 0, 0, 0.658824)
+
 [sub_resource type="Theme" id="Theme_2mwv1"]
 default_font = ExtResource("4_ldln4")
 default_font_size = 30
 Button/colors/font_color = Color(1, 0.18252, 0.134187, 1)
+Button/colors/font_focus_color = Color(0.95, 0, 0, 1)
 Button/colors/font_hover_color = Color(1, 0, 0, 1)
+Button/styles/focus = SubResource("StyleBoxFlat_i5tkk")
 Button/styles/hover = SubResource("StyleBoxFlat_65pc4")
 Button/styles/normal = SubResource("StyleBoxFlat_wkjkv")
+Button/styles/pressed = SubResource("StyleBoxFlat_uir62")
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_ib83g")
@@ -173,31 +181,26 @@ theme = SubResource("Theme_2mwv1")
 [node name="MarginContainer" type="MarginContainer" parent="MainMenu"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.5
+anchor_left = 0.4
 anchor_top = 0.6
-anchor_right = 0.5
+anchor_right = 0.6
 anchor_bottom = 0.9
-offset_left = -13.0601
-offset_right = 13.4399
-offset_bottom = -6.10352e-05
-grow_horizontal = 2
-grow_vertical = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 10
+theme_override_constants/separation = 18
 alignment = 1
 
 [node name="CreateLobby" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "CREATE LOBBY"
+flat = true
 
 [node name="Popup" type="Popup" parent="MainMenu/MarginContainer/VBoxContainer/CreateLobby"]
 title = "Create Lobby"
 initial_position = 1
 size = Vector2i(300, 250)
-visible = true
 min_size = Vector2i(300, 250)
 
 [node name="Control" type="Control" parent="MainMenu/MarginContainer/VBoxContainer/CreateLobby/Popup"]
@@ -219,19 +222,25 @@ color = Color(0.393824, 0.196673, 0.308099, 1)
 
 [node name="JoinLobby" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "JOIN LOBBY"
+flat = true
 
 [node name="Popup" type="Popup" parent="MainMenu/MarginContainer/VBoxContainer/JoinLobby"]
 
 [node name="Options" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "OPTIONS"
+flat = true
 
 [node name="Popup" type="Popup" parent="MainMenu/MarginContainer/VBoxContainer/Options"]
 
 [node name="Exit" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 text = "EXIT"
+flat = true
 
 [node name="Popup" type="Popup" parent="MainMenu/MarginContainer/VBoxContainer/Exit"]
 
