@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bk7vc2uakbucv"]
+[gd_scene load_steps=26 format=3 uid="uid://bk7vc2uakbucv"]
 
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_ib83g"]
 [ext_resource type="Texture2D" uid="uid://bsscsb7hf1wmr" path="res://Textures/Sprites/crosshair179.png" id="2_jifps"]
@@ -60,6 +60,19 @@ content_margin_top = 10.0
 
 [sub_resource type="Theme" id="Theme_cgk8a"]
 default_font_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a80ss"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y2g11"]
+
+[sub_resource type="Theme" id="Theme_emkcn"]
+default_font = ExtResource("4_ldln4")
+default_font_size = 20
+ItemList/colors/font_color = Color(0.88, 0.2904, 0.300227, 1)
+ItemList/colors/font_hovered_color = Color(0.95, 0.95, 0.95, 1)
+ItemList/colors/font_selected_color = Color(1, 1, 1, 1)
+ItemList/styles/hovered = SubResource("StyleBoxFlat_a80ss")
+ItemList/styles/selected = SubResource("StyleBoxFlat_y2g11")
 
 [sub_resource type="BoxMesh" id="BoxMesh_6g88m"]
 
@@ -342,6 +355,7 @@ text = "Score Limit"
 
 [node name="Settings" type="HBoxContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
 layout_mode = 2
+theme = SubResource("Theme_emkcn")
 
 [node name="GameModeList" type="ItemList" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer/Settings"]
 clip_contents = false
@@ -358,12 +372,22 @@ item_1/icon = SubResource("MeshTexture_tdcvm")
 clip_contents = false
 layout_mode = 2
 size_flags_horizontal = 3
+allow_search = false
 auto_height = true
-item_count = 2
+item_count = 10
+max_columns = 15
 same_column_width = true
-item_0/text = "King Maker"
-item_1/text = "Infected"
-item_1/icon = SubResource("MeshTexture_tdcvm")
+icon_mode = 0
+item_0/text = "5"
+item_1/text = "10"
+item_2/text = "15"
+item_3/text = "20"
+item_4/text = "25"
+item_5/text = "25"
+item_6/text = "30"
+item_7/text = "35"
+item_8/text = "40"
+item_9/text = "45"
 
 [node name="ScoreLimitList" type="ItemList" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup/Control/BorderMarginContainer/VBoxContainer/Settings"]
 clip_contents = false
