@@ -8,7 +8,6 @@ const PORT = 9999
 var max_players := 0
 var peer = ENetMultiplayerPeer.new()
 
-@onready var address_entry = $UI/PauseMenu/PanelContainerRight/MarginContainer/VBoxContainer/IPAddress
 
 
 func _on_host_button_pressed():
@@ -26,8 +25,10 @@ func _on_host_button_pressed():
 	upnp_setup()
 
 
-func _on_join_button_pressed():
-	peer.create_client("localhost" if address_entry.text == "" else address_entry.text, PORT)
+func _on_join_button_pressed(ip: String):
+	var error =  peer.create_client("localhost" if ip == "" else ip, PORT)
+	if error: ##TODO: add popup panel to display error(s)
+		return error
 	multiplayer.multiplayer_peer = peer
 	
 	# Create world

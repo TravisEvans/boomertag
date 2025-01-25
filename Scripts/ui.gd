@@ -2,7 +2,7 @@ extends CanvasLayer
 
 signal create_game
 signal end_game
-signal join_game
+signal join_game(ip: String)
 signal left_game
 signal max_players_changed(value: float)
 
@@ -59,7 +59,7 @@ func _on_join_game_pressed() -> void:
 	$MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup.hide()
 	$MainMenu.hide()
 	$HUD.show()
-	join_game.emit()
+	join_game.emit($MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer/LobbyIPEntry.text)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
