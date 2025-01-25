@@ -5,7 +5,7 @@ const Player = preload("res://Scenes/player.tscn")
 const World = preload("res://Scenes/world.tscn")
 const PORT = 9999
 
-var max_players := 0
+var max_players := 2
 var peer = ENetMultiplayerPeer.new()
 
 
