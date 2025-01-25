@@ -12,3 +12,10 @@ comments:
 look at other games for level design.
 for an alpha, pretty commendable.
 again, look at ghostrunner- "https://youtu.be/3_ZXa14odts?t=2760"
+
+
+josh as of alpha 0.1.2
+
+make the falling less floaty
+likes the movement
+idk
