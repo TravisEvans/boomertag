@@ -4,6 +4,7 @@ signal create_game
 signal end_game
 signal join_game
 signal left_game
+signal max_players_changed(value: float)
 
 
 
@@ -39,7 +40,7 @@ func _on_restart_pressed() -> void:
 
 
 func _on_start_game_pressed() -> void:
-	$MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup.hide()
+	$MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/CreateLobbyPopup.hide()
 	$MainMenu.hide()
 	create_game.emit()
 	$PauseMenu.hide()
@@ -54,10 +55,11 @@ func _on_end_lobby_pressed() -> void:
 	end_game.emit()
 
 
-func _on_join_lobby_pressed() -> void:
-	join_game.emit()
-	$PauseMenu.hide()
+func _on_join_game_pressed() -> void:
+	$MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup.hide()
+	$MainMenu.hide()
 	$HUD.show()
+	join_game.emit()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
@@ -67,9 +69,35 @@ func _on_resume_pressed() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
-func _on_close_create_game_menu_pressed() -> void:
-	$MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup.hide()
-
+## CREATE LOBBY BUTTON
 
 func _on_create_lobby_pressed() -> void:
-	$MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/LobbyPopup.show()
+	$MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/CreateLobbyPopup.show()
+
+
+func _on_max_players_h_slider_value_changed(value: int) -> void:
+	$MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/CreateLobbyPopup/Control/BorderMarginContainer/VBoxContainer/SelectedMax.text = str(value) + " selected"
+	max_players_changed.emit(value)
+
+func _on_close_create_game_menu_pressed() -> void:
+	$MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/CreateLobbyPopup.hide()
+
+
+## JOIN LOBBY BUTTON
+
+func _on_join_lobby_pressed() -> void:
+	$MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup.show()
+
+
+func _on_close_join_lobby_menu_pressed() -> void:
+	$MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup.hide()
+
+
+## OPTIONS BUTTON
+
+func _on_options_pressed() -> void:
+	$MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options/OptionsPopup.show()
+
+
+func _on_close_options_menu_pressed() -> void:
+	$MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options/OptionsPopup.hide()

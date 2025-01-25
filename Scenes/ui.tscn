@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bk7vc2uakbucv"]
+[gd_scene load_steps=27 format=3 uid="uid://bk7vc2uakbucv"]
 
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_ib83g"]
 [ext_resource type="Texture2D" uid="uid://bsscsb7hf1wmr" path="res://Textures/Sprites/crosshair179.png" id="2_jifps"]
@@ -81,6 +81,9 @@ mesh = SubResource("BoxMesh_6g88m")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tcfue"]
 content_margin_top = 10.0
+
+[sub_resource type="Theme" id="Theme_3hw0y"]
+default_font_size = 26
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_ib83g")
@@ -295,7 +298,7 @@ theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6laq7")
 text = "2 selected"
 
-[node name="HSlider" type="HSlider" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/CreateLobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
+[node name="MaxPlayersHSlider" type="HSlider" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/CreateLobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -305,6 +308,7 @@ theme_override_styles/slider = SubResource("StyleBoxLine_gjjg4")
 min_value = 2.0
 max_value = 12.0
 value = 2.0
+rounded = true
 tick_count = 11
 ticks_on_borders = true
 
@@ -405,7 +409,6 @@ text = "Map Selection"
 layout_mode = 2
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
-vertical_scroll_mode = 2
 
 [node name="ItemList" type="ItemList" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/CreateLobbyPopup/Control/BorderMarginContainer/VBoxContainer/ScrollContainer"]
 layout_mode = 2
@@ -472,7 +475,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0, 0, 0.294118)
 
-[node name="Control" type="Control" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup"]
+[node name="LobbyList" type="Control" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -480,7 +483,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GreyBox" type="ColorRect" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/Control"]
+[node name="GreyBox" type="ColorRect" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList"]
 layout_mode = 2
 offset_left = 10.0
 offset_top = 10.0
@@ -490,7 +493,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.298039, 0.298039, 0.298039, 1)
 
-[node name="BorderMarginContainer" type="MarginContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/Control"]
+[node name="BorderMarginContainer" type="MarginContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList"]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -505,92 +508,70 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/Control/BorderMarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer"]
 layout_mode = 2
 
-[node name="LobbyList" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
+[node name="LobbyList" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_3l8cq")
 text = "Lobby List"
 
-[node name="LobbyListScrollContainer" type="ScrollContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
+[node name="LobbyListScrollContainer" type="ScrollContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = SubResource("Theme_3hw0y")
 horizontal_scroll_mode = 0
-vertical_scroll_mode = 2
 
-[node name="Lobbies" type="ItemList" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/Control/BorderMarginContainer/VBoxContainer/LobbyListScrollContainer"]
+[node name="Lobbies" type="ItemList" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer/LobbyListScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-item_count = 8
-max_columns = 6
-same_column_width = true
+item_count = 7
 icon_mode = 0
-icon_scale = 0.35
-item_0/text = "map 1"
-item_0/icon = ExtResource("5_orltt")
-item_1/text = "map 2"
-item_1/icon = ExtResource("6_lvdra")
-item_2/text = "map 3"
-item_2/icon = ExtResource("7_hynoo")
-item_3/text = "Map 5"
-item_3/icon = ExtResource("5_orltt")
-item_4/text = "mAp6"
-item_4/icon = ExtResource("6_lvdra")
-item_5/text = "map 7"
-item_5/icon = ExtResource("5_orltt")
-item_6/text = "map 8"
-item_6/icon = ExtResource("6_lvdra")
-item_7/text = "map 9"
-item_7/icon = ExtResource("7_hynoo")
+item_0/text = "Demo Lobby1"
+item_1/text = "Lobby2"
+item_2/text = "Lobby3                            Players: 7/12     Map: Clearview Modelo     Game Mode: Kingmaker"
+item_3/text = "Lobby4"
+item_4/text = "Xeoancilaree's L,,,,     Players: 3/4     Map: Broken Gutters     Game Mode: King of the Hill"
+item_5/text = "Lobby6"
+item_6/text = "Chab's Demo Lobby"
+item_6/disabled = true
 
-[node name="LobbyFilters" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
-visible = false
+[node name="LobbyFilter" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ycm2f")
 text = "Filters"
 
-[node name="SettingsLabels" type="HBoxContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
-visible = false
+[node name="LobbyFilterTextEntry" type="LineEdit" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer"]
 layout_mode = 2
-theme = SubResource("Theme_cgk8a")
 
-[node name="GameMode" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/Control/BorderMarginContainer/VBoxContainer/SettingsLabels"]
-layout_mode = 2
-size_flags_horizontal = 2
-text = "Game Mode"
-
-[node name="Duration" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/Control/BorderMarginContainer/VBoxContainer/SettingsLabels"]
-layout_mode = 2
-size_flags_horizontal = 2
-text = "Duration"
-
-[node name="Label" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/Control/BorderMarginContainer/VBoxContainer/SettingsLabels"]
-layout_mode = 2
-size_flags_horizontal = 2
-text = "Score Limit"
-
-[node name="JoinViaIP" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
+[node name="JoinViaIP" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_tcfue")
 text = "Join via IP"
 
-[node name="LobbyIPEntry" type="LineEdit" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
+[node name="LobbyIPEntry" type="LineEdit" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="StartOrClose" type="HBoxContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/Control/BorderMarginContainer/VBoxContainer"]
+[node name="StartOrClose" type="HBoxContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="JoinGame" type="Button" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/Control/BorderMarginContainer/VBoxContainer/StartOrClose"]
+[node name="JoinGame" type="Button" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer/StartOrClose"]
 layout_mode = 2
 size_flags_horizontal = 2
 size_flags_vertical = 8
 theme_override_styles/normal = SubResource("StyleBoxEmpty_tcfue")
 text = "Join Game"
 
-[node name="CloseJoinLobbyMenu" type="Button" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/Control/BorderMarginContainer/VBoxContainer/StartOrClose"]
+[node name="JoinViaSteam" type="Button" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer/StartOrClose"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tcfue")
+text = "Join via Steam"
+
+[node name="CloseJoinLobbyMenu" type="Button" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer/StartOrClose"]
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_vertical = 8
@@ -602,7 +583,123 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "OPTIONS"
 
-[node name="Popup" type="Popup" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options"]
+[node name="OptionsPopup" type="Popup" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options"]
+auto_translate_mode = 1
+mode = 2
+title = "Create Lobby"
+initial_position = 1
+size = Vector2i(1280, 720)
+visible = true
+min_size = Vector2i(1280, 720)
+
+[node name="RedOutline" type="ColorRect" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options/OptionsPopup"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0.294118)
+
+[node name="OptionsBox" type="Control" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options/OptionsPopup"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GreyBox" type="ColorRect" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options/OptionsPopup/OptionsBox"]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 1270.0
+offset_bottom = 710.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.298039, 0.298039, 0.298039, 1)
+
+[node name="BorderMarginContainer" type="MarginContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options/OptionsPopup/OptionsBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options/OptionsPopup/OptionsBox/BorderMarginContainer"]
+layout_mode = 2
+
+[node name="OptionsTitle" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options/OptionsPopup/OptionsBox/BorderMarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3l8cq")
+text = "Options"
+
+[node name="TabContainer" type="TabContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options/OptionsPopup/OptionsBox/BorderMarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+
+[node name="Gameplay" type="TabBar" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options/OptionsPopup/OptionsBox/BorderMarginContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+current_tab = 0
+tab_count = 2
+tab_0/title = "you really believe I have options yet???????"
+tab_0/tooltip = "dumb????"
+tab_1/title = "silly!"
+metadata/_tab_index = 0
+
+[node name="FOV" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options/OptionsPopup/OptionsBox/BorderMarginContainer/VBoxContainer/TabContainer/Gameplay"]
+layout_mode = 1
+offset_right = 510.0
+offset_bottom = 49.0
+size_flags_vertical = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3l8cq")
+text = "Field Of View"
+
+[node name="Display" type="TabBar" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options/OptionsPopup/OptionsBox/BorderMarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Audio" type="TabBar" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options/OptionsPopup/OptionsBox/BorderMarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="Controls" type="TabBar" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options/OptionsPopup/OptionsBox/BorderMarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="Miscellaneous" type="TabBar" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options/OptionsPopup/OptionsBox/BorderMarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 4
+
+[node name="StartOrClose" type="HBoxContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options/OptionsPopup/OptionsBox/BorderMarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SaveOptions" type="Button" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options/OptionsPopup/OptionsBox/BorderMarginContainer/VBoxContainer/StartOrClose"]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tcfue")
+text = "Save Changes (does nothing)"
+
+[node name="CloseOptionsMenu" type="Button" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options/OptionsPopup/OptionsBox/BorderMarginContainer/VBoxContainer/StartOrClose"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tcfue")
+text = "Close Menu"
 
 [node name="Exit" type="Button" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -615,6 +712,12 @@ text = "EXIT"
 [connection signal="pressed" from="PauseMenu/PanelContainerRight/MarginContainer/VBoxContainer/JoinLobby" to="." method="_on_join_lobby_pressed"]
 [connection signal="pressed" from="PauseMenu/PanelContainerRight/MarginContainer/VBoxContainer/EndLobby" to="." method="_on_end_lobby_pressed"]
 [connection signal="pressed" from="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby" to="." method="_on_create_lobby_pressed"]
+[connection signal="value_changed" from="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/CreateLobbyPopup/Control/BorderMarginContainer/VBoxContainer/MaxPlayersHSlider" to="." method="_on_max_players_h_slider_value_changed"]
 [connection signal="pressed" from="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/CreateLobbyPopup/Control/BorderMarginContainer/VBoxContainer/StartOrClose/StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/CreateLobbyPopup/Control/BorderMarginContainer/VBoxContainer/StartOrClose/CloseCreateGameMenu" to="." method="_on_close_create_game_menu_pressed"]
+[connection signal="pressed" from="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby" to="." method="_on_join_lobby_pressed"]
+[connection signal="pressed" from="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer/StartOrClose/JoinGame" to="." method="_on_join_game_pressed"]
+[connection signal="pressed" from="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer/StartOrClose/CloseJoinLobbyMenu" to="." method="_on_close_join_lobby_menu_pressed"]
+[connection signal="pressed" from="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options/OptionsPopup/OptionsBox/BorderMarginContainer/VBoxContainer/StartOrClose/CloseOptionsMenu" to="." method="_on_close_options_menu_pressed"]
 [connection signal="pressed" from="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

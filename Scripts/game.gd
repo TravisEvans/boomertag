@@ -4,13 +4,15 @@ extends Node
 const Player = preload("res://Scenes/player.tscn")
 const World = preload("res://Scenes/world.tscn")
 const PORT = 9999
+
+var max_players := 0
 var peer = ENetMultiplayerPeer.new()
 
 @onready var address_entry = $UI/PauseMenu/PanelContainerRight/MarginContainer/VBoxContainer/IPAddress
 
 
 func _on_host_button_pressed():
-	peer.create_server(PORT)
+	peer.create_server(PORT, max_players)
 	multiplayer.multiplayer_peer = peer
 	multiplayer.peer_connected.connect(add_player)
 	multiplayer.peer_disconnected.connect(remove_player)
@@ -50,6 +52,9 @@ func _on_ui_left_game() -> void:
 	peer.peer_disconnected.emit()
 	peer.close()
 
+
+func _on_ui_max_players_changed(value: int) -> void:
+	max_players = value
 
 
 ## UPNP
