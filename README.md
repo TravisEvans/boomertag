@@ -20,6 +20,8 @@ so far there are many an idea for this, here is a quick dotpoint jumble
 - Ordinance idea: no grav nade
 - Ordinance idea: xtreeeeme grav nade
 - Ordinance idea: just a fucking grenade
+- movement idea: make the character feel heavier, especially whilst falling 
+- movement idea: falling with great x velocity should give a stagger 
 
 ## Planned development order
 
