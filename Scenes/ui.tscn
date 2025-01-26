@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=3 uid="uid://bk7vc2uakbucv"]
+[gd_scene load_steps=118 format=3 uid="uid://bk7vc2uakbucv"]
 
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_ib83g"]
 [ext_resource type="Texture2D" uid="uid://bsscsb7hf1wmr" path="res://Textures/Sprites/crosshair179.png" id="2_jifps"]
@@ -11,7 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://bchwln4uea67" path="res://Misc Resources/Images/skelerinoed_spritesheet.png" id="6_kjx4n"]
 [ext_resource type="Texture2D" uid="uid://lbedfq8axfx2" path="res://Misc Resources/Images/thumbnail2.jpg" id="6_lvdra"]
 [ext_resource type="Texture2D" uid="uid://dgdv062japk2m" path="res://Misc Resources/Images/thumbnail3.png" id="7_hynoo"]
-[ext_resource type="Texture2D" path="res://Misc Resources/Equipment/Sprites/fishinrod.png" id="7_najws"]
+[ext_resource type="Texture2D" uid="uid://ce7vqp4uiwq3y" path="res://Misc Resources/EquipmentAndOrdinance/Sprites/fishinrod.png" id="7_najws"]
+[ext_resource type="Texture2D" uid="uid://chwi3ew7idoy7" path="res://Misc Resources/EquipmentAndOrdinance/Sprites/grenades.png" id="8_qlj3h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0n7h7"]
 bg_color = Color(0.470861, 0.350802, 0.23699, 0.360784)
@@ -591,8 +592,9 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wtn12"]
-load_path = "res://.godot/imported/grenades.png-f2f3a8acb7aaed571a145c2e809dcdb3.ctex"
+[sub_resource type="AtlasTexture" id="AtlasTexture_feecc"]
+atlas = ExtResource("8_qlj3h")
+region = Rect2(18, 1, 12, 14)
 
 [sub_resource type="Theme" id="Theme_hihbp"]
 
@@ -815,17 +817,17 @@ anchor_bottom = 1.0
 layout_mode = 2
 
 [node name="OrdinanceSprite" type="TextureRect" parent="HUD/BottomLeftMarginContainer/Panel"]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -360.0
-offset_right = -232.0
-offset_bottom = -98.0
+offset_left = -64.0
+offset_right = 64.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("CompressedTexture2D_wtn12")
+texture = SubResource("AtlasTexture_feecc")
 
 [node name="PauseMenu" type="Control" parent="."]
 visible = false
