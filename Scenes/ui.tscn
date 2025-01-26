@@ -542,10 +542,11 @@ item_6/disabled = true
 [node name="LobbyFilter" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ycm2f")
-text = "Filters"
+text = "Lobby search"
 
 [node name="LobbyFilterTextEntry" type="LineEdit" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer"]
 layout_mode = 2
+placeholder_text = "enter lobby name | player count | map | game mode"
 
 [node name="JoinViaIP" type="Label" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -554,6 +555,7 @@ text = "Join via IP"
 
 [node name="LobbyIPEntry" type="LineEdit" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer"]
 layout_mode = 2
+placeholder_text = "enter ip"
 
 [node name="StartOrClose" type="HBoxContainer" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -570,7 +572,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 8
 theme_override_styles/normal = SubResource("StyleBoxEmpty_tcfue")
-text = "Join via Steam"
+text = "Join via Steam (does nothing)"
 
 [node name="CloseJoinLobbyMenu" type="Button" parent="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer/StartOrClose"]
 layout_mode = 2
@@ -715,6 +717,7 @@ text = "EXIT"
 [connection signal="pressed" from="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/CreateLobbyPopup/Control/BorderMarginContainer/VBoxContainer/StartOrClose/StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="MainMenu/MenuPromptsMarginContainer/VBoxContainer/CreateLobby/CreateLobbyPopup/Control/BorderMarginContainer/VBoxContainer/StartOrClose/CloseCreateGameMenu" to="." method="_on_close_create_game_menu_pressed"]
 [connection signal="pressed" from="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby" to="." method="_on_join_lobby_pressed"]
+[connection signal="text_changed" from="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer/LobbyFilterTextEntry" to="." method="_on_lobby_filter_text_entry_text_changed"]
 [connection signal="pressed" from="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer/StartOrClose/JoinGame" to="." method="_on_join_game_pressed"]
 [connection signal="pressed" from="MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer/StartOrClose/CloseJoinLobbyMenu" to="." method="_on_close_join_lobby_menu_pressed"]
 [connection signal="pressed" from="MainMenu/MenuPromptsMarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]

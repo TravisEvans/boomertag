@@ -6,7 +6,7 @@ signal join_game(ip: String)
 signal left_game
 signal max_players_changed(value: float)
 
-
+@onready var lobbies = $MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup/LobbyList/BorderMarginContainer/VBoxContainer/LobbyListScrollContainer/Lobbies
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,6 +28,7 @@ func _process(delta: float) -> void:
 		$HUD.show()
 		$PauseMenu.hide()
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
 
 
 func _on_exit_pressed() -> void:
@@ -87,6 +88,18 @@ func _on_close_create_game_menu_pressed() -> void:
 
 func _on_join_lobby_pressed() -> void:
 	$MainMenu/MenuPromptsMarginContainer/VBoxContainer/JoinLobby/JoinLobbyPopup.show()
+
+
+func _on_lobby_filter_text_entry_text_changed(new_text: String) -> void: # this works pretty well, i like it
+	for i in range(lobbies.item_count-1, -1, -1):
+		if lobbies.get_item_text(i).containsn(new_text) or new_text == "":
+			lobbies.set_item_disabled(i, false)
+			lobbies.set_item_custom_fg_color(i, Color.hex(0xa6a6a6ff))
+		else:
+			lobbies.set_item_disabled(i, true)
+			lobbies.set_item_custom_fg_color(i, Color.hex(0xa6a6a600))
+			lobbies.move_item(i,lobbies.item_count-1)
+
 
 
 func _on_close_join_lobby_menu_pressed() -> void:

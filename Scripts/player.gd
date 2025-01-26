@@ -6,7 +6,7 @@ const AIR_STRAFE_ACCELERATION = 150.0 # changes air speed
 const GROUND_ACCELERATION = 1000.0 
 const SPEED_LIMIT = 0.2 # changes air speed?
 const CROUCH_SPEED = 5.0
-const JUMP_VELOCITY = 5.5
+const JUMP_VELOCITY = 6.0
 const SENSITIVITY = 0.003
 const HEIGHT = 2.0
 const CROUCH_HEIGHT = 1.2
@@ -53,9 +53,7 @@ func _physics_process(delta):
 	
 	# Add gravity
 	if not is_on_floor():
-		velocity += (get_gravity() * delta) if not is_on_wall() else (get_gravity() * delta)/1.375
-	#if is_on_floor(): # reset wall jump count
-		#wall_jump_count = 0
+		velocity += (get_gravity() * (1.325*delta)) if not is_on_wall() else (get_gravity() * delta)/1.375
 	if is_on_wall_only():
 		velocity = velocity.slide(get_wall_normal())
 	
