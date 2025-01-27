@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://bkhjqdd71hvm2"]
 
 [ext_resource type="Texture2D" uid="uid://bsp3dhd3bednr" path="res://Misc Resources/Images/temp/Poliigon_ConcreteFloorPoured_7656/1K/Poliigon_ConcreteFloorPoured_7656_BaseColor.jpg" id="1_4lajq"]
-[ext_resource type="Shader" path="res://vhswiggle.gdshader" id="1_eqcvn"]
+[ext_resource type="Shader" path="res://Scripts/Shaders/vhswiggle.gdshader" id="1_eqcvn"]
 [ext_resource type="Texture2D" uid="uid://bjub2hfys1t2r" path="res://Misc Resources/Images/temp/Poliigon_ConcreteFloorPoured_7656/1K/Poliigon_ConcreteFloorPoured_7656_Normal.png" id="2_ewhm7"]
 [ext_resource type="ArrayMesh" uid="uid://bs87runq5mlcv" path="res://Models/straftat/6.obj" id="2_k7ljk"]
 [ext_resource type="Texture2D" uid="uid://txplq0xxamf4" path="res://Misc Resources/Images/boomertext1-upscaled.png" id="3_k6rt6"]

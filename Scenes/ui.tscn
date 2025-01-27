@@ -16,6 +16,7 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0n7h7"]
 bg_color = Color(0.470861, 0.350802, 0.23699, 0.360784)
+draw_center = false
 
 [sub_resource type="Theme" id="Theme_qpkx0"]
 Panel/styles/panel = SubResource("StyleBoxFlat_0n7h7")
@@ -677,6 +678,7 @@ default_font_size = 26
 script = ExtResource("1_ib83g")
 
 [node name="HUD" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -710,9 +712,11 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.2
 anchor_bottom = 0.3
+mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="HUD/TopLeftMarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="TopCenterMarginContainer" type="MarginContainer" parent="HUD"]
 layout_mode = 1
@@ -720,9 +724,11 @@ anchors_preset = -1
 anchor_left = 0.25
 anchor_right = 0.75
 anchor_bottom = 0.3
+mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="HUD/TopCenterMarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HUD/TopCenterMarginContainer/Panel"]
 visible = false
@@ -747,9 +753,11 @@ anchors_preset = -1
 anchor_left = 0.8
 anchor_right = 1.0
 anchor_bottom = 0.3
+mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="HUD/TopRightMarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HUD/TopRightMarginContainer/Panel"]
 visible = false
@@ -766,9 +774,11 @@ anchor_left = 0.25
 anchor_top = 0.4
 anchor_right = 0.75
 anchor_bottom = 0.7
+mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="HUD/CenterMarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="BottomRightMarginContainer" type="MarginContainer" parent="HUD"]
 layout_mode = 1
@@ -777,9 +787,11 @@ anchor_left = 0.625
 anchor_top = 0.85
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="HUD/BottomRightMarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="EquipmentSprite" type="TextureRect" parent="HUD/BottomRightMarginContainer/Panel"]
 layout_mode = 1
@@ -802,9 +814,11 @@ anchor_left = 0.375
 anchor_top = 0.85
 anchor_right = 0.625
 anchor_bottom = 1.0
+mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="HUD/BottomCenterMarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="BottomLeftMarginContainer" type="MarginContainer" parent="HUD"]
 layout_mode = 1
@@ -812,9 +826,11 @@ anchors_preset = -1
 anchor_top = 0.85
 anchor_right = 0.375
 anchor_bottom = 1.0
+mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="HUD/BottomLeftMarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="OrdinanceSprite" type="TextureRect" parent="HUD/BottomLeftMarginContainer/Panel"]
 texture_filter = 1
